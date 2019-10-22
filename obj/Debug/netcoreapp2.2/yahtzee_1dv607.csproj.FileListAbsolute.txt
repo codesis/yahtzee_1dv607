@@ -1,0 +1,11 @@
+/Users/emma1/yahtzee_1dv607/obj/Debug/netcoreapp2.2/yahtzee_1dv607.csprojAssemblyReference.cache
+/Users/emma1/yahtzee_1dv607/obj/Debug/netcoreapp2.2/yahtzee_1dv607.csproj.CoreCompileInputs.cache
+/Users/emma1/yahtzee_1dv607/obj/Debug/netcoreapp2.2/yahtzee_1dv607.AssemblyInfoInputs.cache
+/Users/emma1/yahtzee_1dv607/obj/Debug/netcoreapp2.2/yahtzee_1dv607.AssemblyInfo.cs
+/Users/emma1/yahtzee_1dv607/bin/Debug/netcoreapp2.2/yahtzee_1dv607.deps.json
+/Users/emma1/yahtzee_1dv607/bin/Debug/netcoreapp2.2/yahtzee_1dv607.runtimeconfig.json
+/Users/emma1/yahtzee_1dv607/bin/Debug/netcoreapp2.2/yahtzee_1dv607.runtimeconfig.dev.json
+/Users/emma1/yahtzee_1dv607/bin/Debug/netcoreapp2.2/yahtzee_1dv607.dll
+/Users/emma1/yahtzee_1dv607/bin/Debug/netcoreapp2.2/yahtzee_1dv607.pdb
+/Users/emma1/yahtzee_1dv607/obj/Debug/netcoreapp2.2/yahtzee_1dv607.dll
+/Users/emma1/yahtzee_1dv607/obj/Debug/netcoreapp2.2/yahtzee_1dv607.pdb
