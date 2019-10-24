@@ -6,7 +6,7 @@ namespace yahtzee_1dv607.Model.Variants
     {
         new public enum Type
         {
-            Aces = 0, 
+            Aces, 
             Twos, 
             Threes, 
             Fours, 

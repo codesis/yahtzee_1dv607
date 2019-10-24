@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+
 using yahtzee_1dv607.Model.Variants;
 using yahtzee_1dv607.Model.Rules;
 
@@ -9,7 +10,7 @@ namespace yahtzee_1dv607.Model
     class Database
     {
         private readonly string path = $"{Environment.CurrentDirectory}/Database/";
-        private string fileName = "yahtzee";
+        private string fileName = "";
 
         private InterfaceRules rules;
         private GameType gameType;
@@ -23,12 +24,12 @@ namespace yahtzee_1dv607.Model
             this.fileName = gameType.ToString();
             Directory.CreateDirectory(path);
         }
-        public string SaveToFile(DateTime date, int roundNumber, List<Player>players) 
+        public string SaveGameToFile(DateTime date, int roundNumber, List<Player> players) 
         {
             string dateStr = date.ToString();
             dateStr = dateStr.Substring(2, 2) + dateStr.Substring(5, 2) + dateStr.Substring(8, 2) + dateStr.Substring(11, 2) + dateStr.Substring(14, 2) + dateStr.Substring(17, 2) + ".txt";
 
-            StreamWriter file = new StreamWriter(path+fileName+dateStr);
+            StreamWriter file = new StreamWriter(path + fileName + dateStr);
 
             string output = date.ToString();
             output = date.ToString();
@@ -51,11 +52,12 @@ namespace yahtzee_1dv607.Model
                     file.WriteLine(output);
                 }
             }
+
             file.Close();
-            return path+fileName+ dateStr;
+            return path + fileName + dateStr;
         }
 
-        public List<Player> GetFromFile(InterfaceRules rules, string fileName, out DateTime date, out int roundNumber)
+        public List<Player> GetPlayersFromFile(InterfaceRules rules, string fileName, out DateTime date, out int roundNumber)
         {
             string line;
             List<Player> players = new List<Player>();
@@ -66,6 +68,7 @@ namespace yahtzee_1dv607.Model
             {
                 items.Add(line);
             }
+
             file.Close();
 
             date = Convert.ToDateTime(items[0]);
@@ -111,7 +114,7 @@ namespace yahtzee_1dv607.Model
         {
             DirectoryInfo d = new DirectoryInfo(path);
             FileInfo[] files = d.GetFiles("*" + gameType.ToString() + "*.txt");
-            
+
             return files;
         }
     }
