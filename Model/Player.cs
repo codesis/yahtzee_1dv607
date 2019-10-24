@@ -7,7 +7,6 @@ namespace yahtzee_1dv607.Model
     class Player
     {
         private List<Score> scoreList;
-        public string Decision { get; protected set; }
 
         public Player()
         {
@@ -30,14 +29,14 @@ namespace yahtzee_1dv607.Model
         public string Name { get; private set; }
         public bool IsAI { get; private set; }
 
-        public void AddScore(Variant.Type variant, int point)
+        public void AddScoreToList(Variant.Type variant, int point)
         {
             scoreList.Add(new Score(variant, point));
         }
 
-        public int GetScore(Variant.Type variant, out bool exist)
+        public int GetScoreFromList(Variant.Type variant, out bool exist)
         {
-            Score score = scoreList.Find(scoreObj => scoreObj.UsedVariant == variant);
+            Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == variant);
 
             if (score != null)
             {
@@ -66,25 +65,28 @@ namespace yahtzee_1dv607.Model
             }
             return sum;
         }
-        public bool GetVariantUsed(Variant.Type variant)
+        public bool GetVariantChosen(Variant.Type variant)
         {
-            Score score = scoreList.Find(scoreObj => scoreObj.UsedVariant == variant);
+            Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == variant);
             if (score != null)
             {
                 return true;
             }
             return false;
         }
-        public List<Variant.Type> GetUsedVariants(Variant Variant)
+        public List<Variant.Type> GetChosenVariants(Variant variant)
         {
             List<Variant.Type> unavailableVariants = new List<Variant.Type>();
-            foreach (Variant.Type cat in variant.GetValues())
+
+            foreach (Variant.Type vari in variant.GetValues())
             {
-                Score score = scoreList.Find(scoreObj => scoreObj.UsedVariant == cat);
+                Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == vari);
+
                 if (score != null)
                 {
-                    unavailableVariants.Add(cat);
+                    unavailableVariants.Add(vari);
                 }
+                
             }
             return unavailableVariants;
         }

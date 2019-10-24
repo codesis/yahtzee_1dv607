@@ -21,25 +21,55 @@ namespace yahtzee_1dv607.Model.Variants
             Chance
         }
 
-        public override int Length() { return Enum.GetNames(typeof(Type)).Length; }
+        public override int Length() 
+        { 
+            return Enum.GetNames(typeof(Type)).Length; 
+        }
 
-        public override Variant.Type[] Variants() { return (Variant.Type[])Enum.GetValues(typeof(Type)); }
+        public override Variant.Type[] Variants() 
+        { 
+            return (Variant.Type[])Enum.GetValues(typeof(Type)); 
+        }
 
-        public override string[] GetNames() { return Enum.GetNames(typeof(Type)); }
+        public override string[] GetNames() 
+        { 
+            return Enum.GetNames(typeof(Type)); 
+        }
 
-        public override string GetName(Variant.Type i) { return Enum.GetName(typeof(Type), i); }
+        public override string GetName(Variant.Type i) 
+        { 
+            return Enum.GetName(typeof(Type), i); 
+        }
 
-        public override string GetName(int i) { return Enum.GetName(typeof(Type), i); }
+        public override string GetName(int i) 
+        { 
+            return Enum.GetName(typeof(Type), i); 
+        }
 
-        public override string GetName(object i) { return Enum.GetName(typeof(Type), i); }
+        public override string GetName(object i) 
+        { 
+            return Enum.GetName(typeof(Type), i); 
+        }
 
-        public override Array GetValues() { return Enum.GetValues(typeof(Type)); }
+        public override Array GetValues() 
+        { 
+            return Enum.GetValues(typeof(Type)); 
+        }
 
-        public override Variant.Type GetVariant(int i) { return (Variant.Type)i; }
+        public override Variant.Type GetVariant(int i) 
+        { 
+            return (Variant.Type)i; 
+        }
 
-        public override int GetValue(Variant.Type type) { return (int)type; }
+        public override int GetValue(Variant.Type type) 
+        { 
+            return (int)type; 
+        }
 
-        public override int GetValue(object type) { return (int)type; }
+        public override int GetValue(object type) 
+        { 
+            return (int)type; 
+        }
 
         public override Variant.Type Yahtzee()
         {
