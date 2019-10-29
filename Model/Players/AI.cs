@@ -25,7 +25,7 @@ namespace yahtzee_1dv607.Model.Players
         }
 
         public Ai(int id, InterfaceRules rules, Variant variant, GameType gameType)
-            : base("Ai" + id, true)
+            : base("AI" + id, true)
         {
             this.rules = rules;
             this.variant = variant;
@@ -72,7 +72,7 @@ namespace yahtzee_1dv607.Model.Players
             Variant.Type highVariant = 0;
             int[] getValueByVariants = new int[variant.Length()];
 
-            foreach (Variant.Type vari in variant.GetValues())
+            foreach (Variant.Type vari in variant.GetList())
             {
                 int i = variant.GetValue(vari);
                 getValueByVariants[i] = rules.GetValueByVariant(vari);

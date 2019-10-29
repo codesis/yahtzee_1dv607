@@ -79,7 +79,7 @@ namespace yahtzee_1dv607.Model.Players
         {
             List<Variant.Type> unavailableVariants = new List<Variant.Type>();
 
-            foreach (Variant.Type vari in variant.GetValues())
+            foreach (Variant.Type vari in variant.GetList())
             {
                 Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == vari);
 

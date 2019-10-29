@@ -10,7 +10,7 @@ namespace yahtzee_1dv607.Model
 {
     class Database
     {
-        private readonly string path = $"{Environment.CurrentDirectory}/Database/";
+        private readonly string path = $"{Environment.CurrentDirectory}/SavedGames/";
         private string fileName = "";
 
         private InterfaceRules rules;
@@ -114,7 +114,7 @@ namespace yahtzee_1dv607.Model
         public FileInfo[] ListSavedGames()
         {
             DirectoryInfo d = new DirectoryInfo(path);
-            FileInfo[] files = d.GetFiles("*" + gameType.ToString() + "*.txt");
+            FileInfo[] files = d.GetFiles(gameType.ToString() + "*.txt");
 
             return files;
         }

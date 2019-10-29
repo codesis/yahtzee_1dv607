@@ -16,9 +16,9 @@ namespace yahtzee_1dv607.View
         }
         public void RenderRoundScore(int roundScore, Variant.Type chosenVariant)
         {
-            PrintMessage("Received " + roundScore + " points for Variant " + variant.GetName(chosenVariant) + "\n");
+            PrintMessage("Received " + roundScore + " points for type " + variant.GetName(chosenVariant) + "\n");
         }
-        public void RenderScoreBoard(List<Player> players, string date, bool fullList)
+        public void RenderHighscore(List<Player> players, string date, bool fullList)
         {
             if (date != null)
                 Console.WriteLine("\nGame played " + date);
@@ -34,7 +34,7 @@ namespace yahtzee_1dv607.View
             }
 
             divider += "|";
-            Console.WriteLine("\n  SCOREBOARD");
+            Console.WriteLine("\nHIGHSCORE");
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("|"+end+"|");
@@ -48,7 +48,7 @@ namespace yahtzee_1dv607.View
 
             if (fullList)
             {
-                foreach (Variant.Type vari in variant.GetValues())
+                foreach (Variant.Type vari in variant.GetList())
                 {
                     string name = String.Format("|{0,-14}\t", variant.GetName((int)vari));
                     Console.Write(name);

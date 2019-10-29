@@ -57,7 +57,7 @@ namespace yahtzee_1dv607.Model.Variants
             return Enum.GetName(typeof(Type), i); 
         }
 
-        public override Array GetValues() 
+        public override Array GetList() 
         { 
             return Enum.GetValues(typeof(Type)); 
         }

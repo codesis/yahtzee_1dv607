@@ -109,35 +109,35 @@ namespace yahtzee_1dv607.Controller
         {
             return roundsView.SelectActivity(DisplayType.ResumeSavedGame);
         }
+        public void SaveGame(string fileName)
+        {
+            roundsView.SaveGame(fileName);
+        }
+
+        public void GameCompleted(string winner, int score)
+        {
+            roundsView.GameCompleted(winner, score);
+        }
+
 
         public bool ViewGameResult()
         {
-            return roundsView.SelectActivity(DisplayType.InspectSavedGame);
+            return roundsView.SelectActivity(DisplayType.ViewSavedGame);
         }
 
-        public bool ViewFullList()
+        public bool ViewHighscore()
         {
-            return roundsView.SelectActivity(DisplayType.ViewFullScoreBord);
+            return roundsView.SelectActivity(DisplayType.ViewHighscore);
         }
 
-        public void GameSaved(string fileName)
+        public void RenderHighscore(List<Player> players, string date = null, bool fullList = true)
         {
-            roundsView.GameSaved(fileName);
-        }
-
-        public void GameFinished(string winner, int score)
-        {
-            roundsView.GameFinished(winner, score);
-        }
-
-        public void RenderScoreBoard(List<Player> players, string date = null, bool fullList = true)
-        {
-            scoreView.RenderScoreBoard(players, date, fullList);
+            scoreView.RenderHighscore(players, date, fullList);
         }
 
         public string SelectGame(FileInfo[] files)
         {
-            return roundsView.SelectGame(files);
+            return roundsView.GetSavedGame(files);
         }
 
     }

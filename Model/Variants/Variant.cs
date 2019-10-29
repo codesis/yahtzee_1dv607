@@ -14,7 +14,7 @@ namespace yahtzee_1dv607.Model.Variants
 
         abstract public string[] GetNames();
 
-        abstract public Array GetValues();
+        abstract public Array GetList();
 
         abstract public int Length();
 

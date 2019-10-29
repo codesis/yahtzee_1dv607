@@ -9,15 +9,59 @@ using yahtzee_1dv607.Model.Variants;
 
 namespace yahtzee_1dv607.View
 {
-    enum DisplayType {ViewFullScoreBord = 0, InspectSavedGame, ResumeSavedGame, ViewAvailableVariants }
+    enum DisplayType { ViewHighscore, ViewSavedGame, ResumeSavedGame, ViewAvailableVariants }
     class RoundsView : DisplayView
     {
-        private readonly string viewFullScoreBord = "\n Do you wish to see the general highscore (y) or the individual highscore (n) of the game (y/n)";
-        private readonly string inspectSavedGame = "\n Do you wish to inspect a saved game (y/n)";
+        private readonly string viewHighscore = "\n Do you wish to see the general highscore (y) or the individual highscore (n) of the game (y/n)";
+        private readonly string viewSavedGame = "\n Do you wish to inspect a saved game (y/n)";
         private readonly string resumeSavedGame = "\n Do you wish to resume a saved game (y/n)";
-        private readonly string viewAvailableVariants = "\n Do you wish to view available variants (y/n)";
+        private readonly string viewAvailableVariants = "\n Do you wish to view available score categories (y/n)";
 
         private Variant variant;
+
+        public bool SelectActivity(DisplayType displayType, bool clear = true)
+        {
+            string message = "";
+            
+            switch (displayType)
+            {
+                case DisplayType.ViewHighscore:
+                    message = viewHighscore;
+                    break;
+                case DisplayType.ViewSavedGame:
+                    message = viewSavedGame;
+                    break;
+                case DisplayType.ResumeSavedGame:
+                    message = resumeSavedGame;
+                    break;
+                case DisplayType.ViewAvailableVariants:
+                    message = viewAvailableVariants;
+                    break;
+                default:
+                    break; 
+            }
+            do
+            {
+                PrintMessage(message);
+
+                string input = Console.ReadLine().ToLower();
+
+                if (input.CompareTo("y") == 0)
+                {
+                    return true;
+                }
+                else if (input.CompareTo("n") == 0)
+                {
+                    if (clear)
+                        Console.Clear();
+                    return false;
+                }
+
+                Console.Clear();
+                PrintErrorMessage("Invalid input, answer with (y/n).");
+
+            } while (true);
+        }
 
         public RoundsView(Variant variant)
         {
@@ -79,12 +123,11 @@ namespace yahtzee_1dv607.View
             while (getInput)
             {
                 diceToRoll = new bool[] { false, false, false, false, false };
-                Console.WriteLine("Select die to roll by entering the id numbers of your choosen die separated by a space e.g.(1 2 3 5), or (0) to stand");
+                Console.WriteLine("Select the dice to roll by entering selected number of dice (1-5). Separate your choice/s space. Enter 0 to stand with current dices");
                 string input = Console.ReadLine();
                 string[] diceNumbers = input.Split(' ');
                 getInput = false;
 
-                //Check if player stand
                 if (Int32.TryParse(diceNumbers[0], out val) && val == 0)
                 {
                     return diceToRoll;
@@ -136,7 +179,7 @@ namespace yahtzee_1dv607.View
         private void RenderVariantList(List<Variant.Type> unavailableVariants)
         {
             string output = "";
-            foreach (Variant.Type vari in variant.GetValues())
+            foreach (Variant.Type vari in variant.GetList())
             {
 
                 bool exist = unavailableVariants.Contains(vari);
@@ -177,68 +220,24 @@ namespace yahtzee_1dv607.View
             } while (true);
         }
 
-        public bool SelectActivity(DisplayType displayType, bool ClearAtNo=true)
-        {
-            string message = "";
-            
-            switch (displayType)
-            {
-                case DisplayType.InspectSavedGame:
-                    message = inspectSavedGame;
-                    break;
-                case DisplayType.ResumeSavedGame:
-                    message = resumeSavedGame;
-                    break;
-                case DisplayType.ViewFullScoreBord:
-                    message = viewFullScoreBord;
-                    break;
-                case DisplayType.ViewAvailableVariants:
-                    message = viewAvailableVariants;
-                    break;
-                default:
-                    break; 
-            }
-            do
-            {
-                PrintMessage(message);
-
-                string input = Console.ReadLine().ToLower();
-
-                if (input.CompareTo("y") == 0)
-                {
-                    return true;
-                }
-                else if (input.CompareTo("n") == 0)
-                {
-                    if (ClearAtNo)
-                        Console.Clear();
-                    return false;
-                }
-
-                Console.Clear();
-                PrintErrorMessage("Invalid input, answer with (y/n).");
-
-            } while (true);
-        }
-
-        public void GameSaved(string fileName)
+        public void SaveGame(string fileName)
         {
             PrintMessage("Game has been saved: " + fileName);
         }
 
-        public void GameFinished(string winner, int score)
+        public void GameCompleted(string winner, int score)
         {
             PrintMessage("*************************************************");
-            PrintMessage(" The winner is " + winner + " at score " + score);
+            PrintMessage(" The winner is " + winner + " with the score " + score);
             PrintMessage("*************************************************");
         }
 
-        public string SelectGame(FileInfo[] files)
+        public string GetSavedGame(FileInfo[] files)
         {
             Console.Clear();
             string selectedFile = ""; 
 
-            PrintMessage("\nSelect file from list, enter number before selected file. \nPress ANY other key to return");
+            PrintMessage("\nSelect file from list. \nTo return press any other key");
             
             for (int i = 0; i < files.Length; i++)
             {

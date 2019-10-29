@@ -45,10 +45,14 @@ namespace yahtzee_1dv607.Controller
             database = new Database(variant, rules, gameType);
             viewController = new ViewController(variant, diceCollection);
 
+            string viewGameFile = "";
+            string resumeGameFile = "";
+
             while (viewController.ViewGameResult())
             {
                 FileInfo[] files = database.ListSavedGames();
-                string viewGameFile = viewController.SelectGame(files);
+                viewGameFile = viewController.SelectGame(files);
+
                 if (viewGameFile != "")
                 {
                     ViewGameFile(viewGameFile);
@@ -57,11 +61,12 @@ namespace yahtzee_1dv607.Controller
             if (viewController.ResumeGame())
             {
                 FileInfo[] files = database.ListSavedGames();
-                string resumeGameFile = viewController.SelectGame(files);
-                if (resumeGameFile != "")
-                {
-                    ResumeGameFile(resumeGameFile);
-                }
+                resumeGameFile = viewController.SelectGame(files);
+            }
+
+            if (resumeGameFile != "")
+            {
+                ResumeGame(resumeGameFile);
             }
             else
             {
@@ -74,16 +79,17 @@ namespace yahtzee_1dv607.Controller
         private void ViewGameFile(string viewGameFile)
         {
             List<string> items = new List<string>();
-            bool fullList = viewController.ViewFullList();
             DateTime date = new DateTime();
+
+            bool highscore = viewController.ViewHighscore();
             int roundNumber = 0;
             players = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
 
             Date = date;
             RoundNumber = roundNumber;
-            viewController.RenderScoreBoard(players, date.ToString(), fullList);
+            viewController.RenderHighscore(players, date.ToString(), highscore);
         }
-        private void ResumeGameFile(string resumeGameFile)
+        private void ResumeGame(string resumeGameFile)
         {
             DateTime date = new DateTime();
             int roundNumber = 0;
@@ -115,7 +121,7 @@ namespace yahtzee_1dv607.Controller
             }
             return numberOfAis;
         }
-                private void PlayerSetup()
+        private void PlayerSetup()
         {
             bool ai;
             players = new List<Player>();
@@ -146,7 +152,7 @@ namespace yahtzee_1dv607.Controller
                 if (i != startRound && !viewController.ContinueGame())
                 {
                     fileName = database.SaveGameToFile(Date, RoundNumber, players);
-                    viewController.GameSaved(fileName);
+                    viewController.SaveGame(fileName);
                     return;
                 }
 
@@ -159,13 +165,16 @@ namespace yahtzee_1dv607.Controller
         private void RunRound(int roundNumber)
         {
             viewController.RenderRoundNumber(roundNumber);
+
             foreach (Player player in players)
             {
                 DiceToRoll = new bool[] { true, true, true, true, true };
                 PlayRound(player);
             }
-            viewController.RenderScoreBoard(players);
+            
+            viewController.RenderHighscore(players);
         }
+
         private void PlayRound(Player player)
         {
             Ai ai = player as Ai;
@@ -232,8 +241,8 @@ namespace yahtzee_1dv607.Controller
                     highScore = player.GetTotalScore();
                 }
             }
-            viewController.GameFinished(winner, highScore);
-            viewController.GameSaved(fileName);
+            viewController.GameCompleted(winner, highScore);
+            viewController.SaveGame(fileName);
         }
     }
 }

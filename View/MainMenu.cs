@@ -49,7 +49,7 @@ namespace yahtzee_1dv607.View
         public void Welcome(GameType gameType)
         {
             Console.Clear();
-            Console.WriteLine(welcome + gameType.ToString());
+            Console.WriteLine(welcome + " to a game of " + gameType.ToString());
         }
     }
 }
