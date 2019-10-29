@@ -1,3 +1,5 @@
+using yahtzee_1dv607.Model.Dices;
+
 namespace yahtzee_1dv607.Model.Rules
 {
     class BasicRules

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace yahtzee_1dv607.Model
+using yahtzee_1dv607.Model.Observer;
+
+namespace yahtzee_1dv607.Model.Dices
 {
     class DiceCollection
     {

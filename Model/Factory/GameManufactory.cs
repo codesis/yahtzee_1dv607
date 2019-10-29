@@ -1,7 +1,8 @@
 using yahtzee_1dv607.Model.Rules;
 using yahtzee_1dv607.Model.Variants;
+using yahtzee_1dv607.Model.Dices;
 
-namespace yahtzee_1dv607.Model
+namespace yahtzee_1dv607.Model.Factory
 {
     class GameManufactory
     {

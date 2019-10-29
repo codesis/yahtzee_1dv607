@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using yahtzee_1dv607.Model.Variants;
 
-namespace yahtzee_1dv607.Model
+namespace yahtzee_1dv607.Model.Players
 {
     
     class Player

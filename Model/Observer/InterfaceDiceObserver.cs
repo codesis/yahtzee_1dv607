@@ -1,4 +1,4 @@
-namespace yahtzee_1dv607.Model
+namespace yahtzee_1dv607.Model.Observer
 {
     interface InterfaceDiceObserver
     {

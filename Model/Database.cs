@@ -4,6 +4,7 @@ using System.IO;
 
 using yahtzee_1dv607.Model.Variants;
 using yahtzee_1dv607.Model.Rules;
+using yahtzee_1dv607.Model.Players;
 
 namespace yahtzee_1dv607.Model
 {

@@ -9,7 +9,7 @@ namespace yahtzee_1dv607.View
 {
     class MainMenu : DisplayView
     {
-        private readonly string welcome = "\t\t\t Welcome to ";
+        private readonly string welcome = "Welcome to ";
         public GameType RenderStartMenu()
         {
             GameType gameType;
@@ -17,9 +17,9 @@ namespace yahtzee_1dv607.View
             Console.Clear();
             while (true)
             {
-                Console.WriteLine("\n\t Which type of Yahtzy do you want to play?\n");
-                Console.WriteLine("\t - Press 1 for Yahtzee");
-                Console.WriteLine("\t - Press 2 for Yatzy");
+                Console.WriteLine("\n Choose your type of game!\n");
+                Console.WriteLine("- Press 1 for Yahtzee");
+                Console.WriteLine("- Press 2 for Yatzy");
 
                 string input = Console.ReadLine();
 
@@ -36,7 +36,7 @@ namespace yahtzee_1dv607.View
                 else
                 {
                     Console.Clear();
-                    PrintErrorMessage("\t Invalid input, try again");
+                    PrintErrorMessage("Invalid input, try again");
                 }
             }
 

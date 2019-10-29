@@ -5,6 +5,9 @@ using System.IO;
 using yahtzee_1dv607.Model;
 using yahtzee_1dv607.Model.Rules;
 using yahtzee_1dv607.Model.Variants;
+using yahtzee_1dv607.Model.Players;
+using yahtzee_1dv607.Model.Dices;
+using yahtzee_1dv607.Model.Factory;
 using yahtzee_1dv607.View;
 
 namespace yahtzee_1dv607.Controller
