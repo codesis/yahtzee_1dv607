@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using yahtzee_1dv607.Model.Rules;
 using yahtzee_1dv607.Model.Variants;
 
@@ -60,6 +61,7 @@ namespace yahtzee_1dv607.Model.Players
             else
             {
                 DiceToRoll = new[] {true, true, true, true, true};
+                Decision = "Reroll all dices";
             }
             return DiceToRoll;
         }
@@ -109,6 +111,7 @@ namespace yahtzee_1dv607.Model.Players
                                     if ((dice[k] != firstPairValue) && (dice[k] != secondPairValue))
                                     {
                                         DiceToRoll[k] = true;
+                                        Decision = "Keep two pair for chance to full house!";
                                         return true;
                                     }
                                 }
@@ -131,6 +134,7 @@ namespace yahtzee_1dv607.Model.Players
                         if (dice[j] != i + 1)
                             DiceToRoll[j] = true;
                     }
+                    Decision = "Keep pair!";
                     return true;
                 }
             }
@@ -149,6 +153,7 @@ namespace yahtzee_1dv607.Model.Players
                         if (dice[j] != i + 1)
                             DiceToRoll[j] = true;
                     }
+                    Decision = "Keep three or four of a kind";
                     return true;
                 }
             }
@@ -179,6 +184,7 @@ namespace yahtzee_1dv607.Model.Players
                                             if (dice[m] == i - 1)
                                             {
                                                 DiceToRoll[m] = false;
+                                                Decision = "Keep good chance for straight!";
                                                 return true;
                                             }
                                         }
@@ -216,6 +222,7 @@ namespace yahtzee_1dv607.Model.Players
                         if (dice[i] == twice)
                         {
                             DiceToRoll[i] = true;
+                            Decision = "Keep good chance for high straight!";
                             twice = 0;  
                         }
                     }
@@ -236,6 +243,7 @@ namespace yahtzee_1dv607.Model.Players
 
                 if (missing <= 1)
                 {
+                    Decision = "Keep good chance for small straight!";
                     for (int i = 0; i < dice.Length; i++)
                     {
                         if (dice[i] == 6)
@@ -259,6 +267,7 @@ namespace yahtzee_1dv607.Model.Players
                 (rules.HasLargeStraight()) && !GetVariantChosen(variant.LargeStraight()) ||
                 (rules.HasSmallStraight()) && !GetVariantChosen(variant.SmallStraight()))
             {
+                Decision = "Stand";
                 return true;
             }
             return false;

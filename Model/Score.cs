@@ -8,9 +8,9 @@ namespace yahtzee_1dv607.Model
 
         public int Points { get; private set; }
 
-        public Score(Variant.Type Variant, int points)
+        public Score(Variant.Type variant, int points)
         {
-            ChosenVariant = Variant;
+            ChosenVariant = variant;
             Points = points;
         }
     }

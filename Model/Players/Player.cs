@@ -7,6 +7,7 @@ namespace yahtzee_1dv607.Model.Players
     class Player
     {
         private List<Score> scoreList;
+        public string Decision { get; protected set; }
 
         public Player()
         {

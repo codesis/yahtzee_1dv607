@@ -16,9 +16,11 @@ namespace yahtzee_1dv607.Model.Factory
         {
             if (gameType == GameType.Yahtzee)
             {
+                return new YahtzeeRules(diceCollection);
             }
             else if (gameType == GameType.Yatzy)
             {
+                return new YatzyRules(diceCollection);
             }
             return null;
         }

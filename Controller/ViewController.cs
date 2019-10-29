@@ -1,7 +1,144 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.IO;
+
+using yahtzee_1dv607.Model.Players;
+using yahtzee_1dv607.Model.Variants;
+using yahtzee_1dv607.Model.Dices;
+using yahtzee_1dv607.Model.Observer;
+using yahtzee_1dv607.View;
+
+
 namespace yahtzee_1dv607.Controller
 {
-    public class ViewController
+    class ViewController : InterfaceDiceObserver
     {
+        private ScoreView scoreView;
+        private SettingsView settingsView;
+        private RoundsView roundsView;
+
+        public ViewController(Variant variant, DiceCollection diceCollection)
+        {
+            settingsView = new SettingsView();
+            scoreView = new ScoreView(variant);
+            roundsView = new RoundsView(variant);
+
+            Subscribe(diceCollection);
+        }
+
+        private void Subscribe(DiceCollection diceCollection)
+        {
+            diceCollection.Subscribe(this);
+        }
+
+        public void DiceRolled(int[] diceValues, int[] dice)
+        {
+            roundsView.RenderDice(dice);
+        }
+
+        public int NumberOfPlayers()
+        {
+            return settingsView.NumberOfPlayers();
+        }
+
+        public string PlayerName(int number, out bool ai)
+        {
+            string name = "";
+
+            ai = settingsView.IsAi(number);
+            if (!ai)
+            {
+                name = settingsView.PlayerName(number);
+            }
+            Console.Clear();
+            return name;
+        }
+
+        public void RenderRoundNumber(int roundNumber)
+        {
+            roundsView.RenderRoundNumber(roundNumber);
+        }
         
+        public void RenderRound(string name)
+        {
+            roundsView.RenderRound(name);
+           
+        }
+
+        public bool[] GetDiceToRoll()
+        {
+            return roundsView.GetDiceToRoll();
+        }
+        
+        public void RenderDice(int[] dice)
+        {
+            roundsView.RenderDice(dice);
+        }
+
+        public void RenderUnavailableVariants(List<Variant.Type> unavailableVariants)
+        {
+            if (roundsView.SelectActivity(DisplayType.ViewAvailableVariants, false))
+            {
+                roundsView.RenderUnavailableVariants(unavailableVariants);
+            }
+        }
+
+        public Variant.Type RenderVariant(List<Variant.Type> unavailableVariants)
+        {
+            return roundsView.RenderVariant(unavailableVariants);
+        }
+
+        public void RenderDiceToRoll(bool[] DiceToRoll, string decision = "")
+        {
+            roundsView.RenderDiceToRoll(DiceToRoll, decision);
+            Thread.Sleep(2000);
+        }
+
+        public void RenderRoundScore(int roundScore, Variant.Type chosenVariant)
+        {
+            scoreView.RenderRoundScore(roundScore, chosenVariant);
+        }
+
+        public bool ContinueGame()
+        {
+            return roundsView.ContinueGame();
+        }
+
+        public bool ResumeGame()
+        {
+            return roundsView.SelectActivity(DisplayType.ResumeSavedGame);
+        }
+
+        public bool ViewGameResult()
+        {
+            return roundsView.SelectActivity(DisplayType.InspectSavedGame);
+        }
+
+        public bool ViewFullList()
+        {
+            return roundsView.SelectActivity(DisplayType.ViewFullScoreBord);
+        }
+
+        public void GameSaved(string fileName)
+        {
+            roundsView.GameSaved(fileName);
+        }
+
+        public void GameFinished(string winner, int score)
+        {
+            roundsView.GameFinished(winner, score);
+        }
+
+        public void RenderScoreBoard(List<Player> players, string date = null, bool fullList = true)
+        {
+            scoreView.RenderScoreBoard(players, date, fullList);
+        }
+
+        public string SelectGame(FileInfo[] files)
+        {
+            return roundsView.SelectGame(files);
+        }
+
     }
 }

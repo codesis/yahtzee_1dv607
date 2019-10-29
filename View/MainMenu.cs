@@ -15,6 +15,7 @@ namespace yahtzee_1dv607.View
             GameType gameType;
             int index;
             Console.Clear();
+            
             while (true)
             {
                 Console.WriteLine("\n Choose your type of game!\n");
