@@ -14,17 +14,17 @@ namespace yahtzee_1dv607.Controller
 {
     class GameController
     {
+        private ViewController viewController;
         private Database database;
-        private List<Player> players;
         private GameManufactory manufactory;
         private InterfaceRules rules;
         private DiceCollection diceCollection;
-        private ViewController viewController;
+        private List<Player> players;
         private Variant variant;
         private GameType gameType;
-
         private DateTime Date { get; set; }
         private int RoundNumber { get; set; }
+        private bool[] DiceToRoll { get; set; }
 
         public GameController()
         {
@@ -32,53 +32,61 @@ namespace yahtzee_1dv607.Controller
             RunGame();
         }
         
-        private bool[] DiceToRoll { get; set; }
-
         private void StartGame()
         {
-            gameType = new MainMenu().RenderStartMenu();
-
             diceCollection = new DiceCollection();
+            gameType = new MainMenu().RenderStartMenu();
             manufactory = new GameManufactory(gameType);
-            rules = manufactory.GetRules(diceCollection);
+
             variant = manufactory.GetVariant();
+            rules = manufactory.GetRules(diceCollection);
             database = new Database(variant, rules, gameType);
             viewController = new ViewController(variant, diceCollection);
 
-            string viewGameFile = "";
-            string resumeGameFile = "";
 
-            while (viewController.ViewHighscore())
+            if (viewController.ViewHighscore())
             {
-                FileInfo[] files = database.ListSavedGames();
-                viewGameFile = viewController.SelectGame(files);
-
+                GetFiles();
             }
+
             if (viewController.ResumeGame())
             {
-                FileInfo[] files = database.ListSavedGames();
-                resumeGameFile = viewController.SelectGame(files);
+                GetFiles();
             }
+
             if (viewController.ViewGameResult())
             {
-                FileInfo[] files = database.ListSavedGames();
-                viewGameFile = viewController.SelectGame(files);
-
-                if (viewGameFile != "")
-                {
-                    ViewGameFile(viewGameFile);
-                }
+                SetViewGameFile();
             }
 
-            if (resumeGameFile != "")
-            {
-                ResumeGame(resumeGameFile);
-            }
             else
             {
                 Date = DateTime.Now;
                 RoundNumber = 0;
                 PlayerSetup();
+            }
+        }
+
+        private string GetFiles ()
+        {
+            string viewGameFile = "";
+
+            FileInfo[] files = database.ListSavedGames();
+            viewGameFile = viewController.SelectGame(files);
+
+            if (viewGameFile != "")
+            {
+                ResumeGame(viewGameFile);
+            }
+
+            return viewGameFile;
+        }
+
+        private void SetViewGameFile ()
+        {
+            if (GetFiles() != "")
+            {
+                ViewGameFile(GetFiles());
             }
         }
 
@@ -95,6 +103,7 @@ namespace yahtzee_1dv607.Controller
             RoundNumber = roundNumber;
             viewController.RenderHighscore(players, date.ToString(), highscore);
         }
+
         private void ResumeGame(string resumeGameFile)
         {
             DateTime date = new DateTime();

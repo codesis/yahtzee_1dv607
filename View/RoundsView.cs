@@ -9,9 +9,9 @@ namespace yahtzee_1dv607.View
     enum DisplayType { ViewHighscore, ViewSavedGame, ResumeSavedGame, ViewAvailableChoices }
     class RoundsView : DisplayView
     {
-        private readonly string viewHighscore = "\n Do you wish to see the general highscore (y) or the individual highscore (n) of the game (y/n)";
-        private readonly string viewSavedGame = "\n Do you wish to inspect a saved game (y/n)";
-        private readonly string resumeSavedGame = "\n Do you wish to resume a saved game (y/n)";
+        private readonly string viewHighscore = "\n I'm sorry, the feature to view highscore is not yet implemented, please press n";
+        private readonly string viewSavedGame = "\n I'm sorry, the feature to inspect a saved game is not yet implemented, please press n";
+        private readonly string resumeSavedGame = "\n I'm sorry, the feature to resume a saved game is not yet implemented, please press n)";
         private readonly string viewAvailableChoices = "\n Do you wish to view available score categories (y/n)";
 
         private Variant variant;
@@ -112,7 +112,7 @@ namespace yahtzee_1dv607.View
 
         public bool[] GetDiceToRoll()
         {
-            bool[] diceToRoll = { };
+            bool[] diceToRoll = {};
             bool getInput = true;
             int val;
             int index;
@@ -120,9 +120,12 @@ namespace yahtzee_1dv607.View
             while (getInput)
             {
                 diceToRoll = new bool[] { false, false, false, false, false };
-                Console.WriteLine("Select the dice to roll by entering selected number of dice (1-5). Separate your choice/s space. Enter 0 to stand with current dices");
+                
+                Console.WriteLine("Select the dice to roll by entering selected number of dice (1-5). Separate your choice/s by space. If you wish to stand, enter 0.");
+
                 string input = Console.ReadLine();
                 string[] diceNumbers = input.Split(' ');
+
                 getInput = false;
 
                 if (Int32.TryParse(diceNumbers[0], out val) && val == 0)
@@ -200,7 +203,7 @@ namespace yahtzee_1dv607.View
         {
             do
             {
-                PrintMessage("\nContinue game (y/n)");
+                PrintMessage("\nDo you wish to continue playing? (y/n)");
                 
                 string input = Console.ReadLine().ToLower();
                 if (input.CompareTo("y") == 0)
@@ -225,7 +228,7 @@ namespace yahtzee_1dv607.View
         public void GameCompleted(string winner, int score)
         {
             PrintMessage("*************************************************");
-            PrintMessage(" The winner is " + winner + " with the score " + score);
+            PrintMessage("Congratulations, the winner is " + winner + " with the score " + score);
             PrintMessage("*************************************************");
         }
 
