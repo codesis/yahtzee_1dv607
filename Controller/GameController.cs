@@ -247,7 +247,7 @@ namespace yahtzee_1dv607.Controller
             {
                 if (player.GetTotalScore() == highScore)
                 {
-                    winner = "We seems to have a draw";
+                    winner = "We seems to have a draw...";
                     highScore = player.GetTotalScore();
                 }
                 if (player.GetTotalScore() > highScore)
