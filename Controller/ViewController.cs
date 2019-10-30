@@ -84,7 +84,7 @@ namespace yahtzee_1dv607.Controller
             return roundsView.RenderChoices(unavailableChoices);
         }
 
-        public void RenderDiceToRoll(bool[] DiceToRoll, string decision = "")
+        public void RenderDiceToRoll(bool[] DiceToRoll, string decision)
         {
             roundsView.RenderDiceToRoll(DiceToRoll, decision);
             Thread.Sleep(2000);
