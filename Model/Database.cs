@@ -93,8 +93,8 @@ namespace yahtzee_1dv607.Model
                 {
                     scoreItems = items[indexStartPlayer + 2 + j].Split('|');
                     int point = Int32.Parse(scoreItems[0]);
-                    Variant.Type cat = (Variant.Type)Enum.Parse(typeof(Variant.Type), (scoreItems[1]));
-                    Score score = new Score(cat, point);
+                    Variant.Type vari = (Variant.Type)Enum.Parse(typeof(Variant.Type), (scoreItems[1]));
+                    Score score = new Score(vari, point);
                     scoreList.Add(score);
                 }
                 if (isAI)
@@ -113,8 +113,8 @@ namespace yahtzee_1dv607.Model
 
         public FileInfo[] ListSavedGames()
         {
-            DirectoryInfo d = new DirectoryInfo(path);
-            FileInfo[] files = d.GetFiles(gameType.ToString() + "*.txt");
+            DirectoryInfo d = new DirectoryInfo(path + "/" + gameType.ToString());
+            FileInfo[] files = d.GetFiles("*.txt");
 
             return files;
         }

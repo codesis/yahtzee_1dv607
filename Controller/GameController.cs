@@ -48,7 +48,18 @@ namespace yahtzee_1dv607.Controller
             string viewGameFile = "";
             string resumeGameFile = "";
 
-            while (viewController.ViewGameResult())
+            while (viewController.ViewHighscore())
+            {
+                FileInfo[] files = database.ListSavedGames();
+                viewGameFile = viewController.SelectGame(files);
+
+            }
+            if (viewController.ResumeGame())
+            {
+                FileInfo[] files = database.ListSavedGames();
+                resumeGameFile = viewController.SelectGame(files);
+            }
+            if (viewController.ViewGameResult())
             {
                 FileInfo[] files = database.ListSavedGames();
                 viewGameFile = viewController.SelectGame(files);
@@ -57,11 +68,6 @@ namespace yahtzee_1dv607.Controller
                 {
                     ViewGameFile(viewGameFile);
                 }
-            }
-            if (viewController.ResumeGame())
-            {
-                FileInfo[] files = database.ListSavedGames();
-                resumeGameFile = viewController.SelectGame(files);
             }
 
             if (resumeGameFile != "")

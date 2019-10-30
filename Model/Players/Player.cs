@@ -69,6 +69,7 @@ namespace yahtzee_1dv607.Model.Players
         public bool GetVariantChosen(Variant.Type variant)
         {
             Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == variant);
+            
             if (score != null)
             {
                 return true;
