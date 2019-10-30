@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using yahtzee_1dv607.Controller;
 
-using Newtonsoft.Json;
+using yahtzee_1dv607.Controller;
 
 namespace yahtzee_1dv607
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using yahtzee_1dv607.Model;
+
 using yahtzee_1dv607.Model.Variants;
 using yahtzee_1dv607.Model.Players;
 

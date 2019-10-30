@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Threading.Tasks;
-using yahtzee_1dv607.Model;
+
 using yahtzee_1dv607.Model.Variants;
 
 namespace yahtzee_1dv607.View
