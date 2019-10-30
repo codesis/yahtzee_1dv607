@@ -44,7 +44,7 @@ namespace yahtzee_1dv607.Model.Players
             }
         }
 
-        public bool[] DecideDiceToRoll(int[] diceVal, int[] dice)
+        public bool[] SelectDiceToRoll(int[] diceVal, int[] dice)
         {
             DiceToRoll = new[] { false, false, false, false, false };
 
@@ -76,7 +76,7 @@ namespace yahtzee_1dv607.Model.Players
             {
                 int i = variant.GetValue(vari);
                 getValueByVariants[i] = rules.GetValueByVariant(vari);
-                if (vari != variant.Chance() && !GetVariantChosen(vari) && getValueByVariants[i] >= highestValue)
+                if (vari != variant.Chance() && !GetPickedChoice(vari) && getValueByVariants[i] >= highestValue)
                 {
                     highestValue = getValueByVariants[i];
                     highVariant = vari;
@@ -84,7 +84,7 @@ namespace yahtzee_1dv607.Model.Players
             }
 
             getValueByVariants[12] = rules.GetValueByVariant(variant.Chance());
-            if (!GetVariantChosen(variant.Chance()) && getValueByVariants[12] > highestValue && highestValue < 10 && highVariant > variant.Threes() && highVariant < variant.Yahtzee())  // Only chance if nothing better or equal
+            if (!GetPickedChoice(variant.Chance()) && getValueByVariants[12] > highestValue && highestValue < 10 && highVariant > variant.Threes() && highVariant < variant.Yahtzee())  // Only chance if nothing better or equal
             {
                 highVariant = variant.Chance();
             }
@@ -92,7 +92,7 @@ namespace yahtzee_1dv607.Model.Players
         }
         private bool KeepTwoPair(int[] diceVal, int[] dice)
         {
-            if (!GetVariantChosen(variant.FullHouse()))
+            if (!GetPickedChoice(variant.FullHouse()))
             {
                 int firstPairValue;
                 int secondPairValue = 0;
@@ -162,7 +162,7 @@ namespace yahtzee_1dv607.Model.Players
 
         private bool YahtzeeStraightChance(int[] diceVal, int[] dice)
         {
-            if (!GetVariantChosen(variant.LargeStraight()) || !GetVariantChosen(variant.SmallStraight()))
+            if (!GetPickedChoice(variant.LargeStraight()) || !GetPickedChoice(variant.SmallStraight()))
             {
                 for (int i = 5; i > 2; i--)
                 {
@@ -204,7 +204,7 @@ namespace yahtzee_1dv607.Model.Players
             int twice = 0;
             DiceToRoll = new bool[] { false, false, false, false, false };
 
-            if (!GetVariantChosen(variant.LargeStraight()))
+            if (!GetPickedChoice(variant.LargeStraight()))
             {   
                 for (int i = 1; i < diceVal.Length; i++)
                 {
@@ -229,7 +229,7 @@ namespace yahtzee_1dv607.Model.Players
                     return true;
                 }
             }
-            if (!GetVariantChosen(variant.SmallStraight()))
+            if (!GetPickedChoice(variant.SmallStraight()))
             {   
                 missing = 0;
 
@@ -262,10 +262,10 @@ namespace yahtzee_1dv607.Model.Players
                 
         private bool Stand()
         {
-            if ((rules.BasicRules.HasYahtzee()) && !GetVariantChosen(variant.Yahtzee()) ||
-                (rules.BasicRules.HasFullHouse()) && !GetVariantChosen(variant.FullHouse()) ||
-                (rules.HasLargeStraight()) && !GetVariantChosen(variant.LargeStraight()) ||
-                (rules.HasSmallStraight()) && !GetVariantChosen(variant.SmallStraight()))
+            if ((rules.BasicRules.HasYahtzee()) && !GetPickedChoice(variant.Yahtzee()) ||
+                (rules.BasicRules.HasFullHouse()) && !GetPickedChoice(variant.FullHouse()) ||
+                (rules.HasLargeStraight()) && !GetPickedChoice(variant.LargeStraight()) ||
+                (rules.HasSmallStraight()) && !GetPickedChoice(variant.SmallStraight()))
             {
                 Decision = "Stand";
                 return true;

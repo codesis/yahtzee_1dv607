@@ -68,7 +68,7 @@ namespace yahtzee_1dv607.View
             this.variant = variant;
         }
 
-        public void RenderRoundNumber(int roundNumber)
+        public void RenderNumberOfRound(int roundNumber)
         {
             PrintMessage("\nRound number " + roundNumber);
         }
@@ -150,24 +150,24 @@ namespace yahtzee_1dv607.View
             return diceToRoll;
         }
 
-        public void RenderUnavailableVariants(List<Variant.Type> unavailableVariants)
+        public void RenderUnavailableChoices(List<Variant.Type> unavailableChoices)
         {
-            RenderVariantList(unavailableVariants);
+            RenderListOfChoices(unavailableChoices);
         }
 
-        public Variant.Type RenderVariant(List<Variant.Type> unavailableVariants)
+        public Variant.Type RenderChoices(List<Variant.Type> unavailableChoices)
         {
             int enumLength = variant.Length();
 
             while (true)
             {
                 int value = 0;
-                PrintMessage("\nSelect green marked number Variant from this list e.g.(3): ");
-                RenderVariantList(unavailableVariants);
+                PrintMessage("\nSelect one of the green marked number choices, e.g.(7): ");
+                RenderListOfChoices(unavailableChoices);
 
                 if (Int32.TryParse(Console.ReadLine(), out value) && value >= 1 && value < enumLength+1)
                 {
-                    bool exist = unavailableVariants.Contains(variant.GetVariant(value -1));
+                    bool exist = unavailableChoices.Contains(variant.GetVariant(value -1));
 
                     if (!exist)
                         return variant.GetVariant(value-1);
@@ -176,13 +176,13 @@ namespace yahtzee_1dv607.View
             }
         }
 
-        private void RenderVariantList(List<Variant.Type> unavailableVariants)
+        private void RenderListOfChoices(List<Variant.Type> unavailableChoices)
         {
             string output = "";
             foreach (Variant.Type vari in variant.GetList())
             {
 
-                bool exist = unavailableVariants.Contains(vari);
+                bool exist = unavailableChoices.Contains(vari);
 
                 if (exist)
                 {

@@ -14,7 +14,7 @@ namespace yahtzee_1dv607.View
         {
             this.variant = variant;
         }
-        public void RenderRoundScore(int roundScore, Variant.Type chosenVariant)
+        public void RenderScoreOfRound(int roundScore, Variant.Type chosenVariant)
         {
             PrintMessage("Received " + roundScore + " points for type " + variant.GetName(chosenVariant) + "\n");
         }

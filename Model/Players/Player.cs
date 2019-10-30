@@ -66,7 +66,7 @@ namespace yahtzee_1dv607.Model.Players
             }
             return sum;
         }
-        public bool GetVariantChosen(Variant.Type variant)
+        public bool GetPickedChoice(Variant.Type variant)
         {
             Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == variant);
             
@@ -76,9 +76,9 @@ namespace yahtzee_1dv607.Model.Players
             }
             return false;
         }
-        public List<Variant.Type> GetChosenVariants(Variant variant)
+        public List<Variant.Type> GetTakenChoices(Variant variant)
         {
-            List<Variant.Type> unavailableVariants = new List<Variant.Type>();
+            List<Variant.Type> unavailableChoices = new List<Variant.Type>();
 
             foreach (Variant.Type vari in variant.GetList())
             {
@@ -86,11 +86,11 @@ namespace yahtzee_1dv607.Model.Players
 
                 if (score != null)
                 {
-                    unavailableVariants.Add(vari);
+                    unavailableChoices.Add(vari);
                 }
                 
             }
-            return unavailableVariants;
+            return unavailableChoices;
         }
     }
 }

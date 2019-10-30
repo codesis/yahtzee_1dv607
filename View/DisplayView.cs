@@ -10,13 +10,13 @@ namespace yahtzee_1dv607.View
     {
         public void PrintMessage(string message)
         {
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.BackgroundColor = ConsoleColor.DarkMagenta;
             Console.ForegroundColor = ConsoleColor.Black;
 
             Console.WriteLine(message);
 
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Magenta;
         }
         public void PrintErrorMessage(string errorMessage)
         {

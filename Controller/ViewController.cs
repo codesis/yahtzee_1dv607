@@ -55,9 +55,9 @@ namespace yahtzee_1dv607.Controller
             return name;
         }
 
-        public void RenderRoundNumber(int roundNumber)
+        public void RenderNumberOfRound(int roundNumber)
         {
-            roundsView.RenderRoundNumber(roundNumber);
+            roundsView.RenderNumberOfRound(roundNumber);
         }
         
         public void RenderRound(string name)
@@ -76,17 +76,17 @@ namespace yahtzee_1dv607.Controller
             roundsView.RenderDice(dice);
         }
 
-        public void RenderUnavailableVariants(List<Variant.Type> unavailableVariants)
+        public void RenderUnavailableChoices(List<Variant.Type> unavailableChoices)
         {
             if (roundsView.SelectActivity(DisplayType.ViewAvailableVariants, false))
             {
-                roundsView.RenderUnavailableVariants(unavailableVariants);
+                roundsView.RenderUnavailableChoices(unavailableChoices);
             }
         }
 
-        public Variant.Type RenderVariant(List<Variant.Type> unavailableVariants)
+        public Variant.Type RenderChoices(List<Variant.Type> unavailableChoices)
         {
-            return roundsView.RenderVariant(unavailableVariants);
+            return roundsView.RenderChoices(unavailableChoices);
         }
 
         public void RenderDiceToRoll(bool[] DiceToRoll, string decision = "")
@@ -95,9 +95,9 @@ namespace yahtzee_1dv607.Controller
             Thread.Sleep(2000);
         }
 
-        public void RenderRoundScore(int roundScore, Variant.Type chosenVariant)
+        public void RenderScoreOfRound(int roundScore, Variant.Type chosenVariant)
         {
-            scoreView.RenderRoundScore(roundScore, chosenVariant);
+            scoreView.RenderScoreOfRound(roundScore, chosenVariant);
         }
 
         public bool ContinueGame()

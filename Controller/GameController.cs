@@ -170,7 +170,7 @@ namespace yahtzee_1dv607.Controller
 
         private void RunRound(int roundNumber)
         {
-            viewController.RenderRoundNumber(roundNumber);
+            viewController.RenderNumberOfRound(roundNumber);
 
             foreach (Player player in players)
             {
@@ -197,13 +197,13 @@ namespace yahtzee_1dv607.Controller
                     {
                         if (player.IsAI)
                         {
-                            DiceToRoll = ai.DecideDiceToRoll(diceCollection.GetNumberOfDiceFaceValue(), diceCollection.GetDice());
+                            DiceToRoll = ai.SelectDiceToRoll(diceCollection.GetNumberOfDiceFaceValue(), diceCollection.GetDice());
                         }
                         else
                         {
                             if (rollNumber == 1)
                                 
-                            viewController.RenderUnavailableVariants(player.GetChosenVariants(variant));
+                            viewController.RenderUnavailableChoices(player.GetTakenChoices(variant));
                             DiceToRoll = viewController.GetDiceToRoll();
                         }
                         viewController.RenderDiceToRoll(DiceToRoll, player.Decision);
@@ -216,7 +216,7 @@ namespace yahtzee_1dv607.Controller
             }
             else
             {
-                variantToUse = viewController.RenderVariant(player.GetChosenVariants(variant));
+                variantToUse = viewController.RenderChoices(player.GetTakenChoices(variant));
             }
             player.AddScoreToList(variantToUse, rules.GetValueByVariant(variantToUse));
 
@@ -225,7 +225,7 @@ namespace yahtzee_1dv607.Controller
 
             if (exist)
             {
-                viewController.RenderRoundScore(roundScore, variantToUse);
+                viewController.RenderScoreOfRound(roundScore, variantToUse);
             }
         }
 
