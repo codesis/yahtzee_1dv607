@@ -174,7 +174,7 @@ namespace yahtzee_1dv607.Controller
                 RunRound(i);
                 RoundNumber++;
             }
-            EndGame();
+            GameCompleted();
         }
 
         private void RunRound(int roundNumber)
@@ -202,6 +202,7 @@ namespace yahtzee_1dv607.Controller
                 if (AnyDiceToRoll())
                 {
                     diceCollection.Roll(DiceToRoll);
+
                     if (rollNumber < 3)
                     {
                         if (player.IsAI)
@@ -227,6 +228,7 @@ namespace yahtzee_1dv607.Controller
             {
                 choiceToPick = viewController.RenderChoices(player.GetTakenChoices(variant));
             }
+
             player.AddScoreToList(choiceToPick, rules.GetValueByVariant(choiceToPick));
 
             bool exist = false;
@@ -238,11 +240,12 @@ namespace yahtzee_1dv607.Controller
             }
         }
 
-        private void EndGame()
+        private void GameCompleted()
         {
             string fileName = database.SaveGameToFile(Date, RoundNumber, players);
             int highScore = 0;
             string winner = "";
+
             foreach (Player player in players)
             {
                 if (player.GetTotalScore() == highScore)
