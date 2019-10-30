@@ -28,13 +28,13 @@ namespace yahtzee_1dv607.Controller
 
         public GameController()
         {
-            InitGame();
+            StartGame();
             RunGame();
         }
         
         private bool[] DiceToRoll { get; set; }
 
-        private void InitGame()
+        private void StartGame()
         {
             gameType = new MainMenu().RenderStartMenu();
 
@@ -184,7 +184,7 @@ namespace yahtzee_1dv607.Controller
         private void PlayRound(Player player)
         {
             Ai ai = player as Ai;
-            Variant.Type variantToUse = variant.Chance();
+            Variant.Type choiceToPick = variant.Chance();
 
             viewController.RenderRound(player.Name);
 
@@ -212,20 +212,20 @@ namespace yahtzee_1dv607.Controller
             }
             if (player.IsAI)
             {
-                variantToUse = ai.SelectVariantToUse();
+                choiceToPick = ai.SelectBestAvailableChoice();
             }
             else
             {
-                variantToUse = viewController.RenderChoices(player.GetTakenChoices(variant));
+                choiceToPick = viewController.RenderChoices(player.GetTakenChoices(variant));
             }
-            player.AddScoreToList(variantToUse, rules.GetValueByVariant(variantToUse));
+            player.AddScoreToList(choiceToPick, rules.GetValueByVariant(choiceToPick));
 
             bool exist = false;
-            int roundScore = player.GetScoreFromList(variantToUse, out exist);
+            int roundScore = player.GetScoreFromList(choiceToPick, out exist);
 
             if (exist)
             {
-                viewController.RenderScoreOfRound(roundScore, variantToUse);
+                viewController.RenderScoreOfRound(roundScore, choiceToPick);
             }
         }
 
@@ -238,7 +238,7 @@ namespace yahtzee_1dv607.Controller
             {
                 if (player.GetTotalScore() == highScore)
                 {
-                    winner = "We have a draw";
+                    winner = "We seems to have a draw";
                     highScore = player.GetTotalScore();
                 }
                 if (player.GetTotalScore() > highScore)

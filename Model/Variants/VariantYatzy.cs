@@ -32,16 +32,6 @@ namespace yahtzee_1dv607.Model.Variants
             return Enum.GetNames(typeof(Type)).Length; 
         }
 
-        public override Variant.Type[] Variants() 
-        { 
-            return (Variant.Type[])Enum.GetValues(typeof(Type)); 
-        }
-
-        public override string[] GetNames() 
-        { 
-            return Enum.GetNames(typeof(Type)); 
-        }
-
         public override string GetName(Variant.Type i) 
         { 
             return Enum.GetName(typeof(Type), i); 
@@ -52,22 +42,12 @@ namespace yahtzee_1dv607.Model.Variants
             return Enum.GetName(typeof(Type), i); 
         }
 
-        public override string GetName(object i) 
-        { 
-            return Enum.GetName(typeof(Type), i); 
-        }
-
         public override Array GetList() 
         { 
             return Enum.GetValues(typeof(Type)); 
         }
 
         public override int GetValue(Variant.Type type) 
-        { 
-            return (int)type; 
-        }
-
-        public override int GetValue(object type) 
         { 
             return (int)type; 
         }
@@ -107,9 +87,5 @@ namespace yahtzee_1dv607.Model.Variants
             return (Variant.Type)Type.Threes;
         }
 
-        public override Variant.Type Sixes()
-        {
-            return (Variant.Type)Type.Sixes;
-        }
     }
 }

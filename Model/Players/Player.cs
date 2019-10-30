@@ -9,7 +9,7 @@ namespace yahtzee_1dv607.Model.Players
         private List<Score> scoreList;
         public string Decision { get; protected set; }
 
-        public Player()
+        private Player()
         {
             this.scoreList = new List<Score>();
         }
@@ -37,7 +37,7 @@ namespace yahtzee_1dv607.Model.Players
 
         public int GetScoreFromList(Variant.Type variant, out bool exist)
         {
-            Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == variant);
+            Score score = scoreList.Find(scoreObj => scoreObj.TakenChoice == variant);
 
             if (score != null)
             {
@@ -68,7 +68,7 @@ namespace yahtzee_1dv607.Model.Players
         }
         public bool GetPickedChoice(Variant.Type variant)
         {
-            Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == variant);
+            Score score = scoreList.Find(scoreObj => scoreObj.TakenChoice == variant);
             
             if (score != null)
             {
@@ -82,7 +82,7 @@ namespace yahtzee_1dv607.Model.Players
 
             foreach (Variant.Type vari in variant.GetList())
             {
-                Score score = scoreList.Find(scoreObj => scoreObj.ChosenVariant == vari);
+                Score score = scoreList.Find(scoreObj => scoreObj.TakenChoice == vari);
 
                 if (score != null)
                 {

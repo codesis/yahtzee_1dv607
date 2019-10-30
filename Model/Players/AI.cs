@@ -66,7 +66,7 @@ namespace yahtzee_1dv607.Model.Players
             return DiceToRoll;
         }
         
-        public Variant.Type SelectVariantToUse()
+        public Variant.Type SelectBestAvailableChoice()
         {
             int highestValue = 0;
             Variant.Type highVariant = 0;
@@ -84,7 +84,7 @@ namespace yahtzee_1dv607.Model.Players
             }
 
             getValueByVariants[12] = rules.GetValueByVariant(variant.Chance());
-            if (!GetPickedChoice(variant.Chance()) && getValueByVariants[12] > highestValue && highestValue < 10 && highVariant > variant.Threes() && highVariant < variant.Yahtzee())  // Only chance if nothing better or equal
+            if (!GetPickedChoice(variant.Chance()) && getValueByVariants[12] > highestValue && highestValue < 10 && highVariant > variant.Threes() && highVariant < variant.Yahtzee()) 
             {
                 highVariant = variant.Chance();
             }

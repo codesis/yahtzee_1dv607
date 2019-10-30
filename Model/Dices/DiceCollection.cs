@@ -7,7 +7,7 @@ namespace yahtzee_1dv607.Model.Dices
 {
     class DiceCollection
     {
-        public const int NoOfDice = 5;
+        private const int NoOfDice = 5;
         private List<InterfaceDiceObserver> observers = new List<InterfaceDiceObserver>();
 
         public DiceCollection()

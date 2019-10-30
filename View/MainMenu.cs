@@ -46,7 +46,7 @@ namespace yahtzee_1dv607.View
 
         }
 
-        public void Welcome(GameType gameType)
+        private void Welcome(GameType gameType)
         {
             Console.Clear();
             Console.WriteLine(welcome + " a game of " + gameType.ToString());

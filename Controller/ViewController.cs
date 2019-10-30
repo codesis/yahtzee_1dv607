@@ -71,14 +71,9 @@ namespace yahtzee_1dv607.Controller
             return roundsView.GetDiceToRoll();
         }
         
-        public void RenderDice(int[] dice)
-        {
-            roundsView.RenderDice(dice);
-        }
-
         public void RenderUnavailableChoices(List<Variant.Type> unavailableChoices)
         {
-            if (roundsView.SelectActivity(DisplayType.ViewAvailableVariants, false))
+            if (roundsView.SelectActivity(DisplayType.ViewAvailableChoices, false))
             {
                 roundsView.RenderUnavailableChoices(unavailableChoices);
             }

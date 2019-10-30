@@ -49,7 +49,7 @@ namespace yahtzee_1dv607.Model
                 for (int i=0; i < score.Length; i++)
                 {
                     output = "";
-                    output += score[i].Points + "|" + score[i].ChosenVariant;
+                    output += score[i].Points + "|" + score[i].TakenChoice;
                     file.WriteLine(output);
                 }
             }
