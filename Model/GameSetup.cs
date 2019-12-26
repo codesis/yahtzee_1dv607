@@ -17,6 +17,8 @@ namespace yahtzee_1dv607.Model
         private InterfaceRules rules;
         private DiceCollection diceCollection;
         private SettingsView settingsView;
+        private RoundsView roundsView;
+        private Renderer renderer;
         private List<Player> players;
         private Variant variant;
         private GameType gameType;
@@ -85,7 +87,7 @@ namespace yahtzee_1dv607.Model
 
         public void RunRound(int roundNumber)
         {
-            viewController.RenderNumberOfRound(roundNumber);
+            roundsView.RenderNumberOfRound(roundNumber);
 
             foreach (Player player in players)
             {
@@ -93,7 +95,7 @@ namespace yahtzee_1dv607.Model
                 PlayRound(player);
             }
             
-            viewController.RenderHighscore(players);
+            renderer.RenderHighscore(players);
         }
 
         private void PlayRound(Player player)
@@ -101,7 +103,7 @@ namespace yahtzee_1dv607.Model
             Ai ai = player as Ai;
             Variant.Type choiceToPick = variant.Chance();
 
-            viewController.RenderRound(player.Name);
+            roundsView.RenderRound(player.Name);
 
             for (int rollNumber = 1; rollNumber <= 3; rollNumber++)
             {
@@ -113,7 +115,7 @@ namespace yahtzee_1dv607.Model
             }
             else
             {
-                choiceToPick = viewController.RenderChoices(player.GetTakenChoices(variant));
+                choiceToPick = renderer.RenderChoices(player.GetTakenChoices(variant));
             }
 
             AddingScoreToList(player, choiceToPick);
@@ -136,10 +138,10 @@ namespace yahtzee_1dv607.Model
                     {
                         if (rollNumber == 1)
                                 
-                        viewController.RenderUnavailableChoices(player.GetTakenChoices(variant));
-                        DiceToRoll = viewController.GetDiceToRoll();
+                        renderer.RenderUnavailableChoices(player.GetTakenChoices(variant));
+                        DiceToRoll = renderer.GetDiceToRoll();
                     }
-                    viewController.RenderDiceToRoll(DiceToRoll, player.Decision);
+                    renderer.RenderDiceToRoll(DiceToRoll, player.Decision);
                 }
             }
         }
@@ -153,7 +155,7 @@ namespace yahtzee_1dv607.Model
 
             if (exist)
             {
-                viewController.RenderScoreOfRound(roundScore, choiceToPick);
+                renderer.RenderScoreOfRound(roundScore, choiceToPick);
             }
         }
     }

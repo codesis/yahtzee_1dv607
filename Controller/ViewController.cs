@@ -21,6 +21,7 @@ namespace yahtzee_1dv607.Controller
         private RoundsView roundsView;
         private InterfaceRules rules;
         private Database database;
+        private Renderer renderer;
         private List<Player> players;
         private GameController gameController;
         private int RoundNumber { get; set; }
@@ -74,7 +75,7 @@ namespace yahtzee_1dv607.Controller
 
             Date = date;
             RoundNumber = roundNumber;
-            RenderHighscore(players, date.ToString(), highscore);
+            renderer.RenderHighscore(players, date.ToString(), highscore);
         }
 
 
@@ -82,45 +83,45 @@ namespace yahtzee_1dv607.Controller
         {
             roundsView.RenderDice(dice);
         }
-        public void RenderNumberOfRound(int roundNumber)
-        {
-            roundsView.RenderNumberOfRound(roundNumber);
-        }
+        // public void RenderNumberOfRound(int roundNumber)
+        // {
+        //     roundsView.RenderNumberOfRound(roundNumber);
+        // }
         
-        public void RenderRound(string name)
-        {
-            roundsView.RenderRound(name);
+        // public void RenderRound(string name)
+        // {
+        //     roundsView.RenderRound(name);
            
-        }
+        // }
 
-        public bool[] GetDiceToRoll()
-        {
-            return roundsView.GetDiceToRoll();
-        }
+        // public bool[] GetDiceToRoll()
+        // {
+        //     return roundsView.GetDiceToRoll();
+        // }
         
-        public void RenderUnavailableChoices(List<Variant.Type> unavailableChoices)
-        {
-            if (roundsView.SelectActivity(DisplayType.ViewAvailableChoices, false))
-            {
-                roundsView.RenderUnavailableChoices(unavailableChoices);
-            }
-        }
+        // public void RenderUnavailableChoices(List<Variant.Type> unavailableChoices)
+        // {
+        //     if (roundsView.SelectActivity(DisplayType.ViewAvailableChoices, false))
+        //     {
+        //         roundsView.RenderUnavailableChoices(unavailableChoices);
+        //     }
+        // }
 
-        public Variant.Type RenderChoices(List<Variant.Type> unavailableChoices)
-        {
-            return roundsView.RenderChoices(unavailableChoices);
-        }
+        // public Variant.Type RenderChoices(List<Variant.Type> unavailableChoices)
+        // {
+        //     return roundsView.RenderChoices(unavailableChoices);
+        // }
 
-        public void RenderDiceToRoll(bool[] DiceToRoll, string decision)
-        {
-            roundsView.RenderDiceToRoll(DiceToRoll, decision);
-            Thread.Sleep(2000);
-        }
+        // public void RenderDiceToRoll(bool[] DiceToRoll, string decision)
+        // {
+        //     roundsView.RenderDiceToRoll(DiceToRoll, decision);
+        //     Thread.Sleep(2000);
+        // }
 
-        public void RenderScoreOfRound(int roundScore, Variant.Type chosenVariant)
-        {
-            scoreView.RenderScoreOfRound(roundScore, chosenVariant);
-        }
+        // public void RenderScoreOfRound(int roundScore, Variant.Type chosenVariant)
+        // {
+        //     scoreView.RenderScoreOfRound(roundScore, chosenVariant);
+        // }
 
         public bool ContinueGame()
         {
@@ -152,10 +153,10 @@ namespace yahtzee_1dv607.Controller
             return roundsView.SelectActivity(DisplayType.ViewHighscore);
         }
 
-        public void RenderHighscore(List<Player> players, string date = null, bool fullList = true)
-        {
-            scoreView.RenderHighscore(players, date, fullList);
-        }
+        // public void RenderHighscore(List<Player> players, string date = null, bool fullList = true)
+        // {
+        //     scoreView.RenderHighscore(players, date, fullList);
+        // }
 
         public string SelectGame(FileInfo[] files)
         {
