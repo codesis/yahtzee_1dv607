@@ -16,11 +16,12 @@ namespace yahtzee_1dv607.Controller
     {
         private ViewController viewController;
         private Database database;
+        private Renderer renderer;
         private GameManufactory manufactory;
         private InterfaceRules rules;
         private DiceCollection diceCollection;
         private GameSetup gameSetup;
-        private List<Player> players;
+        private List<Player> players { get; set; }
         private Variant variant;
         private GameType gameType;
         private DateTime Date { get; set; }
@@ -35,6 +36,7 @@ namespace yahtzee_1dv607.Controller
         
         private void StartGame()
         {
+            GameSetup gameSetup = new GameSetup();
             diceCollection = new DiceCollection();
             gameType = new MainMenu().RenderStartMenu();
             manufactory = new GameManufactory(gameType);
@@ -42,6 +44,7 @@ namespace yahtzee_1dv607.Controller
             variant = manufactory.GetVariant();
             rules = manufactory.GetRules(diceCollection);
             database = new Database(variant, rules, gameType);
+            renderer = new Renderer(variant);
             viewController = new ViewController(variant, diceCollection);
 
             if (viewController.ViewHighscore() || viewController.ResumeGame())
@@ -58,7 +61,7 @@ namespace yahtzee_1dv607.Controller
             {
                 Date = DateTime.Now;
                 RoundNumber = 0;
-                gameSetup.PlayerSetup();
+                players = gameSetup.addedplayers;
             }
         }
 

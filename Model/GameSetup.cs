@@ -19,11 +19,15 @@ namespace yahtzee_1dv607.Model
         private SettingsView settingsView;
         private RoundsView roundsView;
         private Renderer renderer;
-        private List<Player> players;
+        internal List<Player> addedplayers = new List<Player>();
         private Variant variant;
         private GameType gameType;
         private bool[] DiceToRoll { get; set; }
 
+        public GameSetup()
+        {
+            this.addedplayers = new List<Player>();
+        }
         private bool AnyDiceToRoll()
         {
             bool roll = false;
@@ -38,7 +42,7 @@ namespace yahtzee_1dv607.Model
         private int GetNumberOfAis()
         {
             int numberOfAis = 0;
-            foreach (Player player in players)
+            foreach (Player player in addedplayers)
             {
                 if (player.IsAI)
                 {
@@ -50,7 +54,6 @@ namespace yahtzee_1dv607.Model
         public void PlayerSetup()
         {
             bool ai;
-            players = new List<Player>();
             int numberOfPlayers = NumberOfPlayers();
 
             for (int i = 1; i <= numberOfPlayers; i++)
@@ -59,11 +62,11 @@ namespace yahtzee_1dv607.Model
 
                 if (ai)
                 {
-                    players.Add(new Ai(GetNumberOfAis() + 1, rules, variant, gameType));
+                    addedplayers.Add(new Ai(GetNumberOfAis() + 1, rules, variant, gameType));
                 }
                 else
                 {
-                    players.Add(new Player(name));
+                    addedplayers.Add(new Player(name));
                 }
             }
         }
@@ -87,15 +90,15 @@ namespace yahtzee_1dv607.Model
 
         public void RunRound(int roundNumber)
         {
-            roundsView.RenderNumberOfRound(roundNumber);
+            renderer.RenderNumberOfRound(roundNumber);
 
-            foreach (Player player in players)
+            foreach (Player player in addedplayers)
             {
                 DiceToRoll = new bool[] { true, true, true, true, true };
                 PlayRound(player);
             }
             
-            renderer.RenderHighscore(players);
+            renderer.RenderHighscore(addedplayers);
         }
 
         private void PlayRound(Player player)
@@ -103,7 +106,7 @@ namespace yahtzee_1dv607.Model
             Ai ai = player as Ai;
             Variant.Type choiceToPick = variant.Chance();
 
-            roundsView.RenderRound(player.Name);
+            renderer.RenderRound(player.Name);
 
             for (int rollNumber = 1; rollNumber <= 3; rollNumber++)
             {

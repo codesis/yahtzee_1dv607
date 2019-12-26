@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-using yahtzee_1dv607.Model;
-using yahtzee_1dv607.Model.Rules;
 using yahtzee_1dv607.Model.Variants;
 using yahtzee_1dv607.Model.Players;
-using yahtzee_1dv607.Model.Dices;
 using yahtzee_1dv607.View;
 
 namespace yahtzee_1dv607.Model
 {
-    public class Renderer
+    class Renderer
     {
         private ScoreView scoreView;
         private SettingsView settingsView;
         private RoundsView roundsView;
-        private InterfaceRules rules;
-        private Database database;
-        private Renderer renderer;
-        private List<Player> players;
-        private int RoundNumber { get; set; }
-        private DateTime Date { get; set; }
+
+        public Renderer(Variant variant)
+        {
+            settingsView = new SettingsView();
+            scoreView = new ScoreView(variant);
+            roundsView = new RoundsView(variant);
+        }
 
         public void RenderUnavailableChoices(List<Variant.Type> unavailableChoices)
         {
