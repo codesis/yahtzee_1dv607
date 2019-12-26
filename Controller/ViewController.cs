@@ -7,6 +7,8 @@ using yahtzee_1dv607.Model.Players;
 using yahtzee_1dv607.Model.Variants;
 using yahtzee_1dv607.Model.Dices;
 using yahtzee_1dv607.Model.Observer;
+using yahtzee_1dv607.Model.Rules;
+using yahtzee_1dv607.Model;
 using yahtzee_1dv607.View;
 
 
@@ -17,6 +19,12 @@ namespace yahtzee_1dv607.Controller
         private ScoreView scoreView;
         private SettingsView settingsView;
         private RoundsView roundsView;
+        private InterfaceRules rules;
+        private Database database;
+        private List<Player> players;
+        private GameController gameController;
+        private int RoundNumber { get; set; }
+        private DateTime Date { get; set; }
 
         public ViewController(Variant variant, DiceCollection diceCollection)
         {
@@ -32,29 +40,48 @@ namespace yahtzee_1dv607.Controller
             diceCollection.Subscribe(this);
         }
 
+        public string GetFiles ()
+        {
+            string viewGameFile = "";
+
+            FileInfo[] files = database.ListSavedGames();
+            viewGameFile = SelectGame(files);
+
+            if (viewGameFile != "")
+            {
+                gameController.ResumeGame(viewGameFile);
+            }
+
+            return viewGameFile;
+        }
+
+        public void SetViewGameFile ()
+        {
+            if (GetFiles() != "")
+            {
+                ViewGameFile(GetFiles());
+            }
+        }
+
+        public void ViewGameFile(string viewGameFile)
+        {
+            List<string> items = new List<string>();
+            DateTime date = new DateTime();
+
+            bool highscore = ViewHighscore();
+            int roundNumber = 0;
+            players = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
+
+            Date = date;
+            RoundNumber = roundNumber;
+            RenderHighscore(players, date.ToString(), highscore);
+        }
+
+
         public void DiceRolled(int[] diceValues, int[] dice)
         {
             roundsView.RenderDice(dice);
         }
-
-        public int NumberOfPlayers()
-        {
-            return settingsView.NumberOfPlayers();
-        }
-
-        public string PlayerName(int number, out bool ai)
-        {
-            string name = "";
-
-            ai = settingsView.IsAi(number);
-            if (!ai)
-            {
-                name = settingsView.PlayerName(number);
-            }
-            Console.Clear();
-            return name;
-        }
-
         public void RenderNumberOfRound(int roundNumber)
         {
             roundsView.RenderNumberOfRound(roundNumber);
