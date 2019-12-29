@@ -9,11 +9,8 @@ namespace yahtzee_1dv607.Model.Players
     {
         private Variant variant;
         private InterfaceRules rules;
-        
         private bool[] DiceToRoll { get; set; }
-
         delegate bool del(int[] diceVal, int[] dice);
-
         private del KeepStraightChance;
 
         public Ai(string name, InterfaceRules rules, Variant variant, List<Score> scores, GameType gameType)
