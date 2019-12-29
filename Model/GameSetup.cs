@@ -48,6 +48,7 @@ namespace yahtzee_1dv607.Model
             }
             return numberOfAis;
         }
+        
         public void PlayerSetup()
         {
             bool ai;
@@ -68,6 +69,7 @@ namespace yahtzee_1dv607.Model
                 }
             }
         }
+
         private int NumberOfPlayers()
         {
             return settingsView.NumberOfPlayers();
@@ -167,6 +169,5 @@ namespace yahtzee_1dv607.Model
                 }
             }
         }
-
     }
 }
