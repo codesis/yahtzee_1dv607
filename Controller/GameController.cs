@@ -44,7 +44,7 @@ namespace yahtzee_1dv607.Controller
             variant = gameSetup.variant;
             rules = gameSetup.rules;
             database = new Database(variant, rules, gameType);
-            renderer = new Renderer(variant);
+            renderer = gameSetup.renderer;
             viewController = new ViewController(variant, diceCollection);
 
             if (viewController.ViewHighscore() || viewController.ResumeGame())
@@ -89,92 +89,10 @@ namespace yahtzee_1dv607.Controller
                     return;
                 }
 
-                RunRound(i);
+                gameSetup.RunRound(i);
                 RoundNumber++;
             }
             GameCompleted();
-        }
-        private void RunRound(int roundNumber)
-        {
-            renderer.RenderNumberOfRound(roundNumber);
-
-            foreach (Player player in players)
-            {
-                DiceToRoll = new bool[] { true, true, true, true, true };
-                PlayRound(player);
-            }
-            
-            renderer.RenderHighscore(players);
-        }
-
-        private void PlayRound(Player player)
-        {
-            Ai ai = player as Ai;
-            Variant.Type choiceToPick = variant.Chance();
-
-            renderer.RenderRound(player.Name);
-
-            for (int rollNumber = 1; rollNumber <= 3; rollNumber++)
-            {
-                RolledDice(rollNumber, player, ai);
-            }
-            if (player.IsAI)
-            {
-                choiceToPick = ai.SelectBestAvailableChoice();
-            }
-            else
-            {
-                choiceToPick = renderer.RenderChoices(player.GetTakenChoices(variant));
-            }
-
-            AddingScoreToList(player, choiceToPick);
-
-        }
-        private void AddingScoreToList(Player player, Variant.Type choiceToPick)
-        {
-            player.AddScoreToList(choiceToPick, rules.GetValueByVariant(choiceToPick));
-
-            bool exist = false;
-            int roundScore = player.GetScoreFromList(choiceToPick, out exist);
-
-            if (exist)
-            {
-                renderer.RenderScoreOfRound(roundScore, choiceToPick);
-            }
-        }
-        private bool AnyDiceToRoll()
-        {
-            bool roll = false;
-            for (int i=0; i< DiceToRoll.Length;i++)
-            {
-                if (DiceToRoll[i])
-                    roll = true;
-            }
-            return roll;
-        }
-
-        private void RolledDice(int rollNumber, Player player, Ai ai)
-        {
-            if (AnyDiceToRoll())
-            {
-                diceCollection.Roll(DiceToRoll);
-
-                if (rollNumber < 3)
-                {
-                    if (player.IsAI)
-                    {
-                        DiceToRoll = ai.SelectDiceToRoll(diceCollection.GetNumberOfDiceFaceValue(), diceCollection.GetDice());
-                    }
-                    else
-                    {
-                        if (rollNumber == 1)
-                                
-                        renderer.RenderUnavailableChoices(player.GetTakenChoices(variant));
-                        DiceToRoll = renderer.GetDiceToRoll();
-                    }
-                    renderer.RenderDiceToRoll(DiceToRoll, player.Decision);
-                }
-            }
         }
 
         private void GameCompleted()
