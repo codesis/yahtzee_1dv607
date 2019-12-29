@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 using yahtzee_1dv607.Model.Factory;
 using yahtzee_1dv607.Model.Rules;
@@ -66,12 +65,12 @@ namespace yahtzee_1dv607.Model
                 }
             }
         }
-        public int NumberOfPlayers()
+        private int NumberOfPlayers()
         {
             return settingsView.NumberOfPlayers();
         }
 
-        public string PlayerName(int number, out bool ai)
+        private string PlayerName(int number, out bool ai)
         {
             string name = "";
 
