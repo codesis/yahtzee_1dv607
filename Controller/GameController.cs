@@ -36,13 +36,13 @@ namespace yahtzee_1dv607.Controller
         
         private void StartGame()
         {
-            GameSetup gameSetup = new GameSetup();
-            diceCollection = new DiceCollection();
-            gameType = new MainMenu().RenderStartMenu();
-            manufactory = new GameManufactory(gameType);
+            gameSetup = new GameSetup();
+            diceCollection = gameSetup.diceCollection;
+            gameType = gameSetup.gameType;
+            manufactory = gameSetup.manufactory;
 
-            variant = manufactory.GetVariant();
-            rules = manufactory.GetRules(diceCollection);
+            variant = gameSetup.variant;
+            rules = gameSetup.rules;
             database = new Database(variant, rules, gameType);
             renderer = new Renderer(variant);
             viewController = new ViewController(variant, diceCollection);
@@ -61,6 +61,7 @@ namespace yahtzee_1dv607.Controller
             {
                 Date = DateTime.Now;
                 RoundNumber = 0;
+                gameSetup.PlayerSetup();
                 players = gameSetup.addedplayers;
             }
         }
@@ -73,50 +74,6 @@ namespace yahtzee_1dv607.Controller
             Date = date;
             RoundNumber = roundNumber;
         }
-
-        // private bool AnyDiceToRoll()
-        // {
-        //     bool roll = false;
-        //     for (int i=0; i< DiceToRoll.Length;i++)
-        //     {
-        //         if (DiceToRoll[i])
-        //             roll = true;
-        //     }
-        //     return roll;
-        // }
-
-        // private int GetNumberOfAis()
-        // {
-        //     int numberOfAis = 0;
-        //     foreach (Player player in players)
-        //     {
-        //         if (player.IsAI)
-        //         {
-        //             numberOfAis++;
-        //         }
-        //     }
-        //     return numberOfAis;
-        // }
-        // private void PlayerSetup()
-        // {
-        //     bool ai;
-        //     players = new List<Player>();
-        //     int numberOfPlayers = viewController.NumberOfPlayers();
-
-        //     for (int i = 1; i <= numberOfPlayers; i++)
-        //     {
-        //         string name = viewController.PlayerName(i, out ai);
-
-        //         if (ai)
-        //         {
-        //             players.Add(new Ai(GetNumberOfAis() + 1, rules, variant, gameType));
-        //         }
-        //         else
-        //         {
-        //             players.Add(new Player(name));
-        //         }
-        //     }
-        // }
 
         private void RunGame()
         {
@@ -132,85 +89,93 @@ namespace yahtzee_1dv607.Controller
                     return;
                 }
 
-                gameSetup.RunRound(i);
+                RunRound(i);
                 RoundNumber++;
             }
             GameCompleted();
         }
+        private void RunRound(int roundNumber)
+        {
+            renderer.RenderNumberOfRound(roundNumber);
 
-        // private void RunRound(int roundNumber)
-        // {
-        //     viewController.RenderNumberOfRound(roundNumber);
-
-        //     foreach (Player player in players)
-        //     {
-        //         DiceToRoll = new bool[] { true, true, true, true, true };
-        //         PlayRound(player);
-        //     }
+            foreach (Player player in players)
+            {
+                DiceToRoll = new bool[] { true, true, true, true, true };
+                PlayRound(player);
+            }
             
-        //     viewController.RenderHighscore(players);
-        // }
+            renderer.RenderHighscore(players);
+        }
 
-        // private void PlayRound(Player player)
-        // {
-        //     Ai ai = player as Ai;
-        //     Variant.Type choiceToPick = variant.Chance();
+        private void PlayRound(Player player)
+        {
+            Ai ai = player as Ai;
+            Variant.Type choiceToPick = variant.Chance();
 
-        //     viewController.RenderRound(player.Name);
+            renderer.RenderRound(player.Name);
 
-        //     for (int rollNumber = 1; rollNumber <= 3; rollNumber++)
-        //     {
-        //         RolledDice(rollNumber, player, ai);
-        //     }
-        //     if (player.IsAI)
-        //     {
-        //         choiceToPick = ai.SelectBestAvailableChoice();
-        //     }
-        //     else
-        //     {
-        //         choiceToPick = viewController.RenderChoices(player.GetTakenChoices(variant));
-        //     }
+            for (int rollNumber = 1; rollNumber <= 3; rollNumber++)
+            {
+                RolledDice(rollNumber, player, ai);
+            }
+            if (player.IsAI)
+            {
+                choiceToPick = ai.SelectBestAvailableChoice();
+            }
+            else
+            {
+                choiceToPick = renderer.RenderChoices(player.GetTakenChoices(variant));
+            }
 
-        //     AddingScoreToList(player, choiceToPick);
+            AddingScoreToList(player, choiceToPick);
 
-        // }
+        }
+        private void AddingScoreToList(Player player, Variant.Type choiceToPick)
+        {
+            player.AddScoreToList(choiceToPick, rules.GetValueByVariant(choiceToPick));
 
-        // private void RolledDice(int rollNumber, Player player, Ai ai)
-        // {
-        //     if (AnyDiceToRoll())
-        //     {
-        //         diceCollection.Roll(DiceToRoll);
+            bool exist = false;
+            int roundScore = player.GetScoreFromList(choiceToPick, out exist);
 
-        //         if (rollNumber < 3)
-        //         {
-        //             if (player.IsAI)
-        //             {
-        //                 DiceToRoll = ai.SelectDiceToRoll(diceCollection.GetNumberOfDiceFaceValue(), diceCollection.GetDice());
-        //             }
-        //             else
-        //             {
-        //                 if (rollNumber == 1)
+            if (exist)
+            {
+                renderer.RenderScoreOfRound(roundScore, choiceToPick);
+            }
+        }
+        private bool AnyDiceToRoll()
+        {
+            bool roll = false;
+            for (int i=0; i< DiceToRoll.Length;i++)
+            {
+                if (DiceToRoll[i])
+                    roll = true;
+            }
+            return roll;
+        }
+
+        private void RolledDice(int rollNumber, Player player, Ai ai)
+        {
+            if (AnyDiceToRoll())
+            {
+                diceCollection.Roll(DiceToRoll);
+
+                if (rollNumber < 3)
+                {
+                    if (player.IsAI)
+                    {
+                        DiceToRoll = ai.SelectDiceToRoll(diceCollection.GetNumberOfDiceFaceValue(), diceCollection.GetDice());
+                    }
+                    else
+                    {
+                        if (rollNumber == 1)
                                 
-        //                 viewController.RenderUnavailableChoices(player.GetTakenChoices(variant));
-        //                 DiceToRoll = viewController.GetDiceToRoll();
-        //             }
-        //             viewController.RenderDiceToRoll(DiceToRoll, player.Decision);
-        //         }
-        //     }
-        // }
-
-        // private void AddingScoreToList(Player player, Variant.Type choiceToPick)
-        // {
-        //     player.AddScoreToList(choiceToPick, rules.GetValueByVariant(choiceToPick));
-
-        //     bool exist = false;
-        //     int roundScore = player.GetScoreFromList(choiceToPick, out exist);
-
-        //     if (exist)
-        //     {
-        //         viewController.RenderScoreOfRound(roundScore, choiceToPick);
-        //     }
-        // }
+                        renderer.RenderUnavailableChoices(player.GetTakenChoices(variant));
+                        DiceToRoll = renderer.GetDiceToRoll();
+                    }
+                    renderer.RenderDiceToRoll(DiceToRoll, player.Decision);
+                }
+            }
+        }
 
         private void GameCompleted()
         {
