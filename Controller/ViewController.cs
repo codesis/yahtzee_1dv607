@@ -15,8 +15,6 @@ namespace yahtzee_1dv607.Controller
 {
     class ViewController : InterfaceDiceObserver
     {
-        private ScoreView scoreView;
-        private SettingsView settingsView;
         private RoundsView roundsView;
         private InterfaceRules rules;
         private Database database;
@@ -28,8 +26,6 @@ namespace yahtzee_1dv607.Controller
 
         public ViewController(Variant variant, DiceCollection diceCollection)
         {
-            settingsView = new SettingsView();
-            scoreView = new ScoreView(variant);
             roundsView = new RoundsView(variant);
 
             Subscribe(diceCollection);

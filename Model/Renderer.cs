@@ -12,12 +12,10 @@ namespace yahtzee_1dv607.Model
     class Renderer
     {
         private ScoreView scoreView;
-        private SettingsView settingsView;
         private RoundsView roundsView;
 
         public Renderer(Variant variant)
         {
-            settingsView = new SettingsView();
             scoreView = new ScoreView(variant);
             roundsView = new RoundsView(variant);
         }

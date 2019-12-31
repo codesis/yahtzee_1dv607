@@ -14,8 +14,6 @@ namespace yahtzee_1dv607.Controller
     {
         private ViewController viewController;
         private Database database;
-        private Renderer renderer;
-        private GameManufactory manufactory;
         private InterfaceRules rules;
         private DiceCollection diceCollection;
         private GameSetup gameSetup;
@@ -36,12 +34,10 @@ namespace yahtzee_1dv607.Controller
             gameSetup = new GameSetup();
             diceCollection = gameSetup.diceCollection;
             gameType = gameSetup.gameType;
-            manufactory = gameSetup.manufactory;
 
             variant = gameSetup.variant;
             rules = gameSetup.rules;
             database = new Database(variant, rules, gameType);
-            renderer = gameSetup.renderer;
             viewController = new ViewController(variant, diceCollection);
 
             if (viewController.ViewHighscore() || viewController.ResumeGame())
