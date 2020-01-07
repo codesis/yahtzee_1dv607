@@ -29,9 +29,24 @@ namespace yahtzee_1dv607.Model
         {
             string dateStr = date.ToString();
             dateStr = DateTime.Now.ToString("ddMMyyyy") + ".txt";
-            var savingDirectory = path + "/" + gameType.ToString() + "/";
+            var savingDirectory = Path.Combine(path + "/" + gameType.ToString() + "/" + fileName + dateStr);
 
-            StreamWriter file = new StreamWriter(savingDirectory + fileName + dateStr);
+            int j = 1;
+            while (File.Exists(savingDirectory))
+            {
+                string uniqueId = string.Format("({0})", j);
+
+                if (File.Exists(savingDirectory + uniqueId))
+                {
+                    j++;
+                    uniqueId = string.Format("({0})", j);
+                }
+
+                savingDirectory = Path.Combine(savingDirectory + uniqueId);
+
+            }
+
+            StreamWriter file = new StreamWriter(savingDirectory);
 
             string output = date.ToString();
             output = date.ToString();
@@ -114,7 +129,7 @@ namespace yahtzee_1dv607.Model
 
         public FileInfo[] ListSavedGames()
         {
-            DirectoryInfo d = new DirectoryInfo(path + "/" + gameType.ToString() + "/1");
+            DirectoryInfo d = new DirectoryInfo(path + "/" + gameType.ToString());
 
             return d.GetFiles("*.txt");
 
