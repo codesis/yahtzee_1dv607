@@ -237,7 +237,7 @@ namespace yahtzee_1dv607.View
             Console.Clear();
             string selectedFile = ""; 
 
-            PrintMessage("\nSelect file from list. \nTo return press any other key");
+            PrintMessage("\nSelect file from list by entering index number (starting with 0). \nTo return press any other key");
             
             foreach(var file in files)
             {
