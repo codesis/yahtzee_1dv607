@@ -9,9 +9,9 @@ namespace yahtzee_1dv607.View
     enum DisplayType { ViewHighscore, ViewSavedGame, ResumeSavedGame, ViewAvailableChoices }
     class RoundsView : DisplayView
     {
-        private readonly string viewHighscore = "\n I'm sorry, the feature to view highscore is not yet implemented, please press n";
-        private readonly string viewSavedGame = "\n I'm sorry, the feature to inspect a saved game is not yet implemented, please press n";
-        private readonly string resumeSavedGame = "\n I'm sorry, the feature to resume a saved game is not yet implemented, please press n)";
+        private readonly string viewHighscore = "\n View highscore is not yet implemented, please press n";
+        private readonly string viewSavedGame = "\n Inspect a saved game is not yet implemented, please press n";
+        private readonly string resumeSavedGame = "\n Resume a saved game is not yet implemented, please press n)";
         private readonly string viewAvailableChoices = "\n Do you wish to view available score categories (y/n)";
 
         private Variant variant;
@@ -239,9 +239,9 @@ namespace yahtzee_1dv607.View
 
             PrintMessage("\nSelect file from list. \nTo return press any other key");
             
-            for (int i = 0; i < files.Length; i++)
+            foreach(var file in files)
             {
-                Console.WriteLine("(" + i + ") " + files[i].Name);
+                Console.WriteLine(file);
             }
 
             string input = Console.ReadLine();

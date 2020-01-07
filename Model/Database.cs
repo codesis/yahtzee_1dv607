@@ -23,14 +23,15 @@ namespace yahtzee_1dv607.Model
             this.gameType = gameType;
             this.rules = rules;
             this.fileName = gameType.ToString();
-            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(path + fileName);
         }
         public string SaveGameToFile(DateTime date, int roundNumber, List<Player> players) 
         {
             string dateStr = date.ToString();
-            dateStr = dateStr.Substring(2, 2) + dateStr.Substring(5, 2) + dateStr.Substring(8, 2) + dateStr.Substring(11, 2) + dateStr.Substring(14, 2) + dateStr.Substring(17, 2) + ".txt";
+            dateStr = DateTime.Now.ToString("ddMMyyyy") + ".txt";
+            var savingDirectory = path + "/" + gameType.ToString() + "/";
 
-            StreamWriter file = new StreamWriter(path + fileName + dateStr);
+            StreamWriter file = new StreamWriter(savingDirectory + fileName + dateStr);
 
             string output = date.ToString();
             output = date.ToString();
@@ -113,10 +114,10 @@ namespace yahtzee_1dv607.Model
 
         public FileInfo[] ListSavedGames()
         {
-            DirectoryInfo d = new DirectoryInfo(path + "/" + gameType.ToString());
-            FileInfo[] files = d.GetFiles("*.txt");
+            DirectoryInfo d = new DirectoryInfo(path + "/" + gameType.ToString() + "/1");
 
-            return files;
+            return d.GetFiles("*.txt");
+
         }
     }
 }

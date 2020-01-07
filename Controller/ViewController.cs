@@ -36,7 +36,7 @@ namespace yahtzee_1dv607.Controller
             diceCollection.Subscribe(this);
         }
 
-        public string GetFiles ()
+        public string GetFiles (Database database)
         {
             string viewGameFile = "";
 
@@ -51,11 +51,11 @@ namespace yahtzee_1dv607.Controller
             return viewGameFile;
         }
 
-        public void SetViewGameFile ()
+        public void SetViewGameFile (Database database)
         {
-            if (GetFiles() != "")
+            if (GetFiles(database) != "")
             {
-                ViewGameFile(GetFiles());
+                ViewGameFile(GetFiles(database));
             }
         }
 

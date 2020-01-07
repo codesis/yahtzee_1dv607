@@ -6,7 +6,6 @@ using yahtzee_1dv607.Model.Rules;
 using yahtzee_1dv607.Model.Variants;
 using yahtzee_1dv607.Model.Players;
 using yahtzee_1dv607.Model.Dices;
-using yahtzee_1dv607.Model.Factory;
 
 namespace yahtzee_1dv607.Controller
 {
@@ -42,12 +41,12 @@ namespace yahtzee_1dv607.Controller
 
             if (viewController.ViewHighscore() || viewController.ResumeGame())
             {
-                viewController.GetFiles();
+                viewController.GetFiles(database);
             }
 
             if (viewController.ViewGameResult())
             {
-                viewController.SetViewGameFile();
+                viewController.SetViewGameFile(database);
             }
 
             else
