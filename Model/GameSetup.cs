@@ -20,7 +20,6 @@ namespace yahtzee_1dv607.Model
         internal Renderer renderer;
         internal Database database;
         internal List<Player> addedplayers = new List<Player>();
-        internal List<Player> playersfromfile = new List<Player>();
         internal Variant variant;
         internal GameType gameType;
         private bool[] DiceToRoll { get; set; }
@@ -37,7 +36,6 @@ namespace yahtzee_1dv607.Model
             this.renderer = new Renderer(variant);
             settingsView = new SettingsView();
             this.addedplayers = new List<Player>();
-            this.playersfromfile = database.playersfromfile;
         }
 
         private int GetNumberOfAis()

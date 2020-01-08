@@ -39,14 +39,17 @@ namespace yahtzee_1dv607.Controller
             database = gameSetup.database;
             viewController = new ViewController(variant, diceCollection);
 
-            if (viewController.ViewHighscore() || viewController.ResumeGame())
+            while (viewController.ViewHighscore())
             {
-                viewController.GetFiles(database);
+                viewController.GetFiles(database, true);
             }
-
-            if (viewController.ViewGameResult())
+            
+            if (viewController.ResumeGame())
             {
-                viewController.SetViewGameFile(database);
+                viewController.GetFiles(database, false);
+                Date = viewController.Date;
+                RoundNumber = viewController.RoundNumber;
+                players = viewController.GetListOfPlayersFromFile();
             }
 
             else

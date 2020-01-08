@@ -9,8 +9,7 @@ namespace yahtzee_1dv607.View
     enum DisplayType { ViewHighscore, ViewSavedGame, ResumeSavedGame, ViewAvailableChoices }
     class RoundsView : DisplayView
     {
-        private readonly string viewHighscore = "\n View highscore is not yet implemented, please press n";
-        private readonly string viewSavedGame = "\n Inspect a saved game is not yet implemented, please press n";
+        private readonly string viewHighscore = "\n Do you wish to view a previous games' highscore? (y/n)";
         private readonly string resumeSavedGame = "\n Resume a saved game is not yet implemented, please press n)";
         private readonly string viewAvailableChoices = "\n Do you wish to view available score categories (y/n)";
 
@@ -24,9 +23,6 @@ namespace yahtzee_1dv607.View
             {
                 case DisplayType.ViewHighscore:
                     message = viewHighscore;
-                    break;
-                case DisplayType.ViewSavedGame:
-                    message = viewSavedGame;
                     break;
                 case DisplayType.ResumeSavedGame:
                     message = resumeSavedGame;
