@@ -79,7 +79,8 @@ namespace yahtzee_1dv607.Model
             string line;
             List<Player> players = new List<Player>();
             List<string> items = new List<string>();
-            StreamReader file = new StreamReader(path+fileName);
+            var savingDirectory = Path.Combine(path + "/" + gameType.ToString() + "/" + fileName);
+            StreamReader file = new StreamReader(savingDirectory);
 
             while((line = file.ReadLine()) != null)
             {
@@ -131,7 +132,7 @@ namespace yahtzee_1dv607.Model
         {
             DirectoryInfo d = new DirectoryInfo(path + "/" + gameType.ToString());
 
-            return d.GetFiles("*.txt");
+            return d.GetFiles();
 
         }
     }

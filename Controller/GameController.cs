@@ -65,6 +65,8 @@ namespace yahtzee_1dv607.Controller
             players = database.GetPlayersFromFile(rules, resumeGameFile, out date, out roundNumber);
             Date = date;
             RoundNumber = roundNumber;
+
+            
         }
 
         private void RunGame()

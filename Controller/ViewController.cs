@@ -45,7 +45,10 @@ namespace yahtzee_1dv607.Controller
 
             if (viewGameFile != "")
             {
-                gameController.ResumeGame(viewGameFile);
+                DateTime date = new DateTime();
+                int roundNumber = 0;
+                players = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
+                // renderer.RenderHighscore(players);
             }
 
             return viewGameFile;
