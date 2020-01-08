@@ -17,7 +17,6 @@ namespace yahtzee_1dv607.Controller
         private DiceCollection diceCollection;
         private GameSetup gameSetup;
         private List<Player> players { get; set; }
-        private List<Player> playersfromfile { get; set; }
         private Variant variant;
         private GameType gameType;
         private DateTime Date { get; set; }
@@ -57,24 +56,6 @@ namespace yahtzee_1dv607.Controller
                 gameSetup.PlayerSetup();
                 players = gameSetup.addedplayers;
             }
-        }
-
-        public void ResumeGame(string resumeGameFile)
-        {
-            Console.WriteLine(resumeGameFile);
-            // DateTime date = new DateTime();
-            // int roundNumber = 0;
-            // database.GetPlayersFromFile(rules, resumeGameFile, out date, out roundNumber);
-            // playersfromfile = gameSetup.playersfromfile;
-            // Console.WriteLine(playersfromfile.Count); // the list is empty, need to find out to instantiate correctly
-
-            // DateTime date = new DateTime();
-            // int roundNumber = 0;
-            // players = database.GetPlayersFromFile(rules, resumeGameFile, out date, out roundNumber);
-            // Date = date;
-            // RoundNumber = roundNumber;
-
-
         }
 
         private void RunGame()

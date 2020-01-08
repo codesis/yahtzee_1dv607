@@ -19,9 +19,7 @@ namespace yahtzee_1dv607.Controller
         private InterfaceRules rules;
         private Database database;
         private Renderer renderer;
-        private List<Player> players;
         private List<Player> playersfromfile { get; set; }
-        private GameController gameController;
         private int RoundNumber { get; set; }
         private DateTime Date { get; set; }
 
@@ -50,10 +48,6 @@ namespace yahtzee_1dv607.Controller
                 DateTime date = new DateTime();
                 int roundNumber = 0;
                 playersfromfile = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
-                Date = date;
-                RoundNumber = roundNumber;
-                Console.WriteLine(playersfromfile.Count);
-
 
                 renderer.RenderHighscore(playersfromfile, date.ToString(), true);
             }
