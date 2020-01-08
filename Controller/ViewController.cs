@@ -20,6 +20,7 @@ namespace yahtzee_1dv607.Controller
         private Database database;
         private Renderer renderer;
         private List<Player> players;
+        private List<Player> playersfromfile { get; set; }
         private GameController gameController;
         private int RoundNumber { get; set; }
         private DateTime Date { get; set; }
@@ -27,6 +28,7 @@ namespace yahtzee_1dv607.Controller
         public ViewController(Variant variant, DiceCollection diceCollection)
         {
             roundsView = new RoundsView(variant);
+            renderer = new Renderer(variant);
 
             Subscribe(diceCollection);
         }
@@ -47,8 +49,13 @@ namespace yahtzee_1dv607.Controller
             {
                 DateTime date = new DateTime();
                 int roundNumber = 0;
-                players = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
-                // renderer.RenderHighscore(players);
+                playersfromfile = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
+                Date = date;
+                RoundNumber = roundNumber;
+                Console.WriteLine(playersfromfile.Count);
+
+
+                renderer.RenderHighscore(playersfromfile, date.ToString(), true);
             }
 
             return viewGameFile;
@@ -69,11 +76,11 @@ namespace yahtzee_1dv607.Controller
 
             bool highscore = ViewHighscore();
             int roundNumber = 0;
-            players = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
+            playersfromfile = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
 
             Date = date;
             RoundNumber = roundNumber;
-            renderer.RenderHighscore(players, date.ToString(), highscore);
+            renderer.RenderHighscore(playersfromfile, date.ToString(), highscore);
         }
 
 

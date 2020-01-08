@@ -16,6 +16,7 @@ namespace yahtzee_1dv607.Model
         private InterfaceRules rules;
         private GameType gameType;
         private Variant variant;
+        internal List<Player> playersfromfile = new List<Player>();
 
         public Database(Variant variant, InterfaceRules rules, GameType gameType)
         {
@@ -23,6 +24,7 @@ namespace yahtzee_1dv607.Model
             this.gameType = gameType;
             this.rules = rules;
             this.fileName = gameType.ToString();
+            this.playersfromfile = new List<Player>();
             Directory.CreateDirectory(path + fileName);
         }
         public string SaveGameToFile(DateTime date, int roundNumber, List<Player> players) 
@@ -77,7 +79,7 @@ namespace yahtzee_1dv607.Model
         public List<Player> GetPlayersFromFile(InterfaceRules rules, string fileName, out DateTime date, out int roundNumber)
         {
             string line;
-            List<Player> players = new List<Player>();
+            this.playersfromfile = new List<Player>();
             List<string> items = new List<string>();
             var savingDirectory = Path.Combine(path + "/" + gameType.ToString() + "/" + fileName);
             StreamReader file = new StreamReader(savingDirectory);
@@ -117,15 +119,15 @@ namespace yahtzee_1dv607.Model
                 if (isAI)
                 {
                     Ai ai = new Ai(name, rules, variant, scoreList, gameType);
-                    players.Add(ai);
+                    playersfromfile.Add(ai);
                 }
                 else
                 {
                     Player player = new Player(name, scoreList);
-                    players.Add(player);
+                    playersfromfile.Add(player);
                 }
             }
-            return players;
+            return playersfromfile;
         }
 
         public FileInfo[] ListSavedGames()

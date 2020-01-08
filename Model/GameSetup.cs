@@ -18,7 +18,9 @@ namespace yahtzee_1dv607.Model
         private SettingsView settingsView;
         internal GameManufactory manufactory;
         internal Renderer renderer;
+        internal Database database;
         internal List<Player> addedplayers = new List<Player>();
+        internal List<Player> playersfromfile = new List<Player>();
         internal Variant variant;
         internal GameType gameType;
         private bool[] DiceToRoll { get; set; }
@@ -28,12 +30,14 @@ namespace yahtzee_1dv607.Model
             this.gameType = new MainMenu().RenderStartMenu();
             this.manufactory = new GameManufactory(gameType);
             this.diceCollection = new DiceCollection();
+            this.database = new Database(variant, rules, gameType);
 
             this.variant = manufactory.GetVariant();
             this.rules = manufactory.GetRules(diceCollection);
             this.renderer = new Renderer(variant);
             settingsView = new SettingsView();
             this.addedplayers = new List<Player>();
+            this.playersfromfile = database.playersfromfile;
         }
 
         private int GetNumberOfAis()
