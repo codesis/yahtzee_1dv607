@@ -20,6 +20,7 @@ namespace yahtzee_1dv607.Model
         internal Renderer renderer;
         internal Database database;
         internal List<Player> addedplayers = new List<Player>();
+        private List<Player> playersfromfile = new List<Player>();
         internal Variant variant;
         internal GameType gameType;
         private bool[] DiceToRoll { get; set; }
@@ -89,6 +90,7 @@ namespace yahtzee_1dv607.Model
             Console.Clear();
             return name;
         }
+
         public void RunRound(int roundNumber)
         {
             renderer.RenderNumberOfRound(roundNumber);
@@ -125,6 +127,7 @@ namespace yahtzee_1dv607.Model
             AddingScoreToList(player, choiceToPick);
 
         }
+
         private void AddingScoreToList(Player player, Variant.Type choiceToPick)
         {
             player.AddScoreToList(choiceToPick, rules.GetValueByVariant(choiceToPick));
@@ -137,6 +140,7 @@ namespace yahtzee_1dv607.Model
                 renderer.RenderScoreOfRound(roundScore, choiceToPick);
             }
         }
+
         private bool AnyDiceToRoll()
         {
             bool roll = false;
