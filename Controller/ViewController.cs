@@ -16,8 +16,6 @@ namespace yahtzee_1dv607.Controller
     class ViewController : InterfaceDiceObserver
     {
         private RoundsView roundsView;
-        private InterfaceRules rules;
-        private Database database;
         private Renderer renderer;
         private List<Player> playersfromfile { get; set; }
         public int RoundNumber { get; set; }
@@ -36,7 +34,7 @@ namespace yahtzee_1dv607.Controller
             diceCollection.Subscribe(this);
         }
 
-        public string GetFiles (Database database, bool selection)  
+        public string GetFiles (InterfaceRules rules, Database database, bool selection)  
         {
             string viewGameFile = "";
 
