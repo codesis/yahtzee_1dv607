@@ -87,6 +87,7 @@ namespace yahtzee_1dv607.Model.Players
             }
             return highVariant;
         }
+
         private bool KeepTwoPair(int[] diceVal, int[] dice)
         {
             if (!GetPickedChoice(variant.FullHouse()))
@@ -195,6 +196,7 @@ namespace yahtzee_1dv607.Model.Players
             }
             return false;
         }
+        
         private bool YatzyStraightChance(int[] diceVal, int[] dice)
         {
             int missing = 0;

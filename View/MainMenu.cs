@@ -7,6 +7,7 @@ namespace yahtzee_1dv607.View
     class MainMenu : DisplayView
     {
         private readonly string welcome = "Welcome to";
+        
         public GameType RenderStartMenu()
         {
             GameType gameType;

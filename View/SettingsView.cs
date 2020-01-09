@@ -21,6 +21,7 @@ namespace yahtzee_1dv607.View
                 Console.WriteLine("Invalid input value, you need to give a value between 1 and 5.");
             }
         }
+
         public string PlayerName(int number)
         {
             Console.Clear();
@@ -40,6 +41,7 @@ namespace yahtzee_1dv607.View
             } 
             while (true);
         }
+        
         public bool IsAi(int number)
         {
             do

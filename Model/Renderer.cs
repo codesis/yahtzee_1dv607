@@ -32,6 +32,7 @@ namespace yahtzee_1dv607.Model
         {
             return roundsView.RenderChoices(unavailableChoices);
         }
+
         public void RenderDiceToRoll(bool[] DiceToRoll, string decision)
         {
             roundsView.RenderDiceToRoll(DiceToRoll, decision);
@@ -42,10 +43,12 @@ namespace yahtzee_1dv607.Model
         {
             scoreView.RenderScoreOfRound(roundScore, chosenVariant);
         }
+
         public void RenderHighscore(List<Player> players, string date = null, bool fullList = true)
         {
             scoreView.RenderHighscore(players, date, fullList);
         }
+        
         public void RenderNumberOfRound(int roundNumber)
         {
             roundsView.RenderNumberOfRound(roundNumber);

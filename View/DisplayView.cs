@@ -14,6 +14,7 @@ namespace yahtzee_1dv607.View
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Magenta;
         }
+        
         public void PrintErrorMessage(string errorMessage)
         {
             Console.BackgroundColor = ConsoleColor.DarkRed;

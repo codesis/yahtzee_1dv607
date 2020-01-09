@@ -7,6 +7,7 @@ namespace yahtzee_1dv607.Model.Factory
     class GameManufactory
     {
         private GameType gameType;
+        
         public GameManufactory(GameType gameType)
         {
             this.gameType = gameType;

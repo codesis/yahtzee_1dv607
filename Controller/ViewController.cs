@@ -77,6 +77,7 @@ namespace yahtzee_1dv607.Controller
         {
             return roundsView.SelectActivity(DisplayType.ResumeSavedGame);
         }
+        
         public void SaveGame(string fileName)
         {
             roundsView.SaveGame(fileName);

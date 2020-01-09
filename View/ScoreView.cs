@@ -10,14 +10,17 @@ namespace yahtzee_1dv607.View
     class ScoreView : DisplayView
     {
         private Variant variant;
+        
         public ScoreView(Variant variant)
         {
             this.variant = variant;
         }
+
         public void RenderScoreOfRound(int roundScore, Variant.Type chosenVariant)
         {
             PrintMessage("Received " + roundScore + " points for type " + variant.GetName(chosenVariant) + "\n");
         }
+
         public void RenderHighscore(List<Player> players, string date, bool fullList)
         {
             if (date != null)

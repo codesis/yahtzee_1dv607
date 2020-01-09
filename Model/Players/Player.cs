@@ -19,6 +19,7 @@ namespace yahtzee_1dv607.Model.Players
             Name = name;
             IsAI = ai;
         }
+
         public Player(string name, List<Score> scores,  bool ai = false) : this(name, ai)
         {
             foreach (Score score in scores)
@@ -50,6 +51,7 @@ namespace yahtzee_1dv607.Model.Players
                 return 0;
             }
         }
+
         public Score[] GetScoreList()
         {
             Score[] scoreListCopy = new Score[scoreList.Count];
@@ -57,6 +59,7 @@ namespace yahtzee_1dv607.Model.Players
             scoreList.CopyTo(scoreListCopy, 0);
             return scoreListCopy;
         }
+
         public int GetTotalScore()
         {
             int sum = 0;
@@ -66,6 +69,7 @@ namespace yahtzee_1dv607.Model.Players
             }
             return sum;
         }
+
         public bool GetPickedChoice(Variant.Type variant)
         {
             Score score = scoreList.Find(scoreObj => scoreObj.TakenChoice == variant);
@@ -76,6 +80,7 @@ namespace yahtzee_1dv607.Model.Players
             }
             return false;
         }
+        
         public List<Variant.Type> GetTakenChoices(Variant variant)
         {
             List<Variant.Type> unavailableChoices = new List<Variant.Type>();

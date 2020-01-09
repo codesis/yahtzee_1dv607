@@ -57,6 +57,7 @@ namespace yahtzee_1dv607.Model.Rules
             }
             return false;
         }
+        
         public bool HasFullHouse()
         {
             int[] diceVal = diceCollection.GetNumberOfDiceFaceValue();
