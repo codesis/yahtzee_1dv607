@@ -6,10 +6,11 @@ using yahtzee_1dv607.Model.Variants;
 
 namespace yahtzee_1dv607.View
 {
-    enum DisplayType { ViewHighscore, ViewSavedGame, ResumeSavedGame, ViewAvailableChoices }
+    enum DisplayType { ViewHighscore, ViewFullOrShortHighscore, ResumeSavedGame, ViewAvailableChoices }
     class RoundsView : DisplayView
     {
-        private readonly string viewHighscore = "\n Do you wish to view a previous games' highscore? (y/n)";
+        private readonly string viewHighscore = "\n Do you wish to view a previous game's highscore? (y/n)";
+        private readonly string viewFullOrShortHighscore = "\n Do you wish to view a previous game's full (y) or short (n) highscore?";
         private readonly string resumeSavedGame = "\n Resuming a saved game is not yet finalized, please press n";
         private readonly string viewAvailableChoices = "\n Do you wish to view available score categories (y/n)";
 
@@ -23,6 +24,9 @@ namespace yahtzee_1dv607.View
             {
                 case DisplayType.ViewHighscore:
                     message = viewHighscore;
+                    break;
+                case DisplayType.ViewFullOrShortHighscore:
+                    message = viewFullOrShortHighscore;
                     break;
                 case DisplayType.ResumeSavedGame:
                     message = resumeSavedGame;

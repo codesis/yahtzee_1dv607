@@ -67,7 +67,7 @@ namespace yahtzee_1dv607.Model.Players
         {
             int highestValue = 0;
             Variant.Type highVariant = 0;
-            int[] getValueByVariants = new int[variant.Length()];
+            int[] getValueByVariants = new int[variant.Length()]; // NullReferenceException here when resuming game
 
             foreach (Variant.Type vari in variant.GetList())
             {
@@ -160,7 +160,7 @@ namespace yahtzee_1dv607.Model.Players
 
         private bool YahtzeeStraightChance(int[] diceVal, int[] dice)
         {
-            if (!GetPickedChoice(variant.LargeStraight()) || !GetPickedChoice(variant.SmallStraight()))
+            if (!GetPickedChoice(variant.LargeStraight()) || !GetPickedChoice(variant.SmallStraight())) // NullReferenceException here when resuming game (yahtzee)
             {
                 for (int i = 5; i > 2; i--)
                 {
@@ -203,7 +203,7 @@ namespace yahtzee_1dv607.Model.Players
             int twice = 0;
             DiceToRoll = new bool[] { false, false, false, false, false };
 
-            if (!GetPickedChoice(variant.LargeStraight()))
+            if (!GetPickedChoice(variant.LargeStraight())) // NullReferenceException here when resuming game (yatzy)
             {   
                 for (int i = 1; i < diceVal.Length; i++)
                 {

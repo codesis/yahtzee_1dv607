@@ -34,7 +34,7 @@ namespace yahtzee_1dv607.Controller
             diceCollection.Subscribe(this);
         }
 
-        public string GetFiles (InterfaceRules rules, Database database, bool selection)  
+        public string GetFiles (InterfaceRules rules, Database database)  
         {
             string viewGameFile = "";
 
@@ -48,11 +48,12 @@ namespace yahtzee_1dv607.Controller
                 playersfromfile = database.GetPlayersFromFile(rules, viewGameFile, out date, out roundNumber);
                 Date = date;
                 RoundNumber = roundNumber;
+                bool fullList = ViewShortHighscore();
 
-                if (selection == true)
-                {
-                    renderer.RenderHighscore(playersfromfile, date.ToString(), true);
-                } 
+                // if (selection == true)
+                // {
+                    renderer.RenderHighscore(playersfromfile, date.ToString(), fullList);
+                // } 
             }
 
             return viewGameFile;
@@ -91,6 +92,11 @@ namespace yahtzee_1dv607.Controller
         public bool ViewHighscore()
         {
             return roundsView.SelectActivity(DisplayType.ViewHighscore);
+        }
+
+        public bool ViewShortHighscore()
+        {
+            return roundsView.SelectActivity(DisplayType.ViewFullOrShortHighscore);
         }
 
         public string SelectGame(FileInfo[] files)

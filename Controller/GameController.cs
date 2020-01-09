@@ -40,12 +40,12 @@ namespace yahtzee_1dv607.Controller
 
             while (viewController.ViewHighscore())
             {
-                viewController.GetFiles(rules, database, true);
+                viewController.GetFiles(rules, database);
             }
             
             if (viewController.ResumeGame())
             {
-                viewController.GetFiles(rules, database, false);
+                viewController.GetFiles(rules, database);
                 Date = viewController.Date;
                 RoundNumber = viewController.RoundNumber;
                 players = viewController.GetListOfPlayersFromFile();
