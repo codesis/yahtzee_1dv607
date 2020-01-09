@@ -91,7 +91,7 @@ namespace yahtzee_1dv607.Model
             return name;
         }
 
-        public void RunRound(int roundNumber)
+        public void RunRound(int roundNumber, List<Player> addedplayers) 
         {
             renderer.RenderNumberOfRound(roundNumber);
 

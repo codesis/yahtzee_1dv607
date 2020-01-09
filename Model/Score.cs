@@ -2,7 +2,7 @@ using yahtzee_1dv607.Model.Variants;
 
 namespace yahtzee_1dv607.Model
 {
-    class Score
+    public class Score
     {
         public int Points { get; private set; }
         public Variant.Type TakenChoice { get; private set; }
