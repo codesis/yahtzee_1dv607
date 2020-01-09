@@ -25,7 +25,6 @@ namespace yahtzee_1dv607.Controller
         public GameController()
         {
             StartGame();
-            // RunGame();
         }
         
         private void StartGame()
@@ -50,8 +49,7 @@ namespace yahtzee_1dv607.Controller
                 Date = viewController.Date;
                 RoundNumber = viewController.RoundNumber;
                 players = viewController.GetListOfPlayersFromFile();
-                            RunGame(players);
-
+                
             }
             else
             {
@@ -60,6 +58,8 @@ namespace yahtzee_1dv607.Controller
                 gameSetup.PlayerSetup();
                 players = gameSetup.addedplayers;
             }
+            
+            RunGame(players);
         }
 
         private void RunGame(List<Player> players)

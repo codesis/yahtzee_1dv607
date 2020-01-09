@@ -10,7 +10,7 @@ namespace yahtzee_1dv607.View
     class RoundsView : DisplayView
     {
         private readonly string viewHighscore = "\n Do you wish to view a previous games' highscore? (y/n)";
-        private readonly string resumeSavedGame = "\n Resume a saved game is not yet implemented, please press n)";
+        private readonly string resumeSavedGame = "\n Resuming a saved game is not yet finalized, please press n";
         private readonly string viewAvailableChoices = "\n Do you wish to view available score categories (y/n)";
 
         private Variant variant;

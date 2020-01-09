@@ -20,7 +20,6 @@ namespace yahtzee_1dv607.Model
         internal Renderer renderer;
         internal Database database;
         internal List<Player> addedplayers = new List<Player>();
-        private List<Player> playersfromfile = new List<Player>();
         internal Variant variant;
         internal GameType gameType;
         private bool[] DiceToRoll { get; set; }
