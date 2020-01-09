@@ -11,7 +11,7 @@ namespace yahtzee_1dv607.View
     {
         private readonly string viewHighscore = "\n Do you wish to view a previous game's highscore? (y/n)";
         private readonly string viewFullOrShortHighscore = "\n Do you wish to view a previous game's full (y) or short (n) highscore?";
-        private readonly string resumeSavedGame = "\n Resuming a saved game is not yet finalized, please press n";
+        private readonly string resumeSavedGame = "\n Resuming a saved game is not yet finalized, please press n to proceed";
         private readonly string viewAvailableChoices = "\n Do you wish to view available score categories (y/n)";
 
         private Variant variant;

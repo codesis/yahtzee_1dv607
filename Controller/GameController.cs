@@ -49,7 +49,6 @@ namespace yahtzee_1dv607.Controller
                 Date = viewController.Date;
                 RoundNumber = viewController.RoundNumber;
                 players = viewController.GetListOfPlayersFromFile();
-                
             }
             else
             {

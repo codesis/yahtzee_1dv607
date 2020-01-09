@@ -50,10 +50,7 @@ namespace yahtzee_1dv607.Controller
                 RoundNumber = roundNumber;
                 bool fullList = ViewShortHighscore();
 
-                // if (selection == true)
-                // {
-                    renderer.RenderHighscore(playersfromfile, date.ToString(), fullList);
-                // } 
+                renderer.RenderHighscore(playersfromfile, date.ToString(), fullList);
             }
 
             return viewGameFile;
