@@ -13,7 +13,7 @@ Instructions are presented as you play.
 
 Have fun, and good luck!
 
-To be finalized: the possibility to resume a previous saved game. At time being, the implementation is faulty and will not work accordingly. A message in the terminal will tell you how to proceed.
+<i>To be finalized: the possibility to resume a previous saved game. At time being, the implementation is faulty and will not work accordingly. A message in the terminal will tell you how to proceed.</i>
 
 #### Documentation
 Within the folder Documentation you shall find three different diagrams. Two are a class diagram over the full application (one is the updated version, one the older incomplete one - it's obvious by their names), the other is a sequence diagram for playing the game.
